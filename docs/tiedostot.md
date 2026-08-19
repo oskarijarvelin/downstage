@@ -75,6 +75,19 @@ lopputulos. Väärä automaattinen parsinta ei ole.
 
 Identtinen uudelleenlataus tunnistetaan tiivisteestä eikä tuota mitään.
 
+### Parsinta onnistuu osittain useammin kuin kokonaan epäonnistuu
+
+Yksi lataus ei ole yksi lopputulos. Sama lähetys voi sisältää luettavan riderin ja
+skannatun backline-liitteen, josta ei saa tekstiä irti.
+
+**Luettavasta osasta syntyneet rivit etenevät normaalisti eivätkä jää odottamaan
+sitä osaa, joka vaatii käsin lukemista.** Muuten yksi huono liite jäädyttäisi koko
+latauksen, ja käytännössä tuottaja alkaisi kiertää järjestelmää sähköpostilla.
+
+Dokumentin tila on tällöin `osittain_parsittu`. Tuottajalle syntyy tehtävä vain
+siitä osasta, jota malli ei lukenut, ja lataajalle näkyy sama tieto: mikä meni läpi
+ja mikä odottaa käsittelyä.
+
 ## Luokka 2: aikasidonnainen versiointi
 
 Media-aineisto menee nimettyyn paikkaan, jolla on omistaja, määräaika ja tekniset

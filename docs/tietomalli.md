@@ -82,6 +82,12 @@ voi olla koko tuotannon pohjakuva tai yhden artistin backline-lista.
 | `alkaa` | timestamptz | |
 | `kesto` | interval | |
 | `vastapuoli_id` | uuid, null | Artisti tai puhuja osapuolena |
+| `nakyy_asiakkaalle` | bool | Näkyykö rivi asiakasrenderöinnissä |
+
+`nakyy_asiakkaalle` on kenttä eikä suunnittelijan kertapäätös. Oletusarvo tulee
+slotin tyypistä: `tekninen` piiloon, muut näkyviin. Tuottaja voi kääntää sen
+riveittäin, jolloin periaate "kaksi näkymää samaan dataan" on muokattavissa
+tuotantokohtaisesti.
 
 Vaihdot ja soundcheckit ovat slotteja siinä missä esityksetkin. Muuten aikataulun
 riippuvuuslaskenta joutuu keksimään ne joka kerta uudestaan.
@@ -159,13 +165,26 @@ siitä että jotain on yliyleistetty.
 | `kuvaus` | text | |
 | `ehdottaja_osapuoli_id` | uuid | |
 | `ehdotettu_at` | timestamptz | |
-| `kustannusvaikutus` | numeric | |
+| `kustannusarvio` | numeric, null | Mallin tai pyytäjän arvio. Ei sitova |
+| `kustannusvaikutus` | numeric, null | Tuottajan hinnoittelema summa. Sitova |
+| `hinnoittelija_id` | uuid, null | Kuka hinnoitteli ja milloin |
+| `hinnoiteltu_at` | timestamptz, null | |
 | `aikatauluvaikutus` | interval, null | |
 | `tila` | enum | pyydetty, hyvaksytty, hylatty, rauennut |
 | `paattaja_osapuoli_id` | uuid, null | |
 | `paatetty_at` | timestamptz, null | |
 | `lahde` | enum | kayttoliittyma, sahkoposti, malli |
 | `lahde_lainaus` | text, null | Alkuperäinen viesti, jos muutos syntyi siitä |
+
+**Arvio ja hinta ovat kaksi eri kenttää, eivät saman kentän kaksi tilaa.**
+`kustannusarvio` syntyy automaattisesti, kun malli parsii riderin, tai kun tilaaja
+lähettää pyynnön ja arvioi sen itse. `kustannusvaikutus` syntyy vasta kun ihminen
+hinnoittelee. Tästä seuraa sääntö, joka koskee sekä käyttöliittymää että logiikkaa:
+
+> Hinnoittelematon muutosrivi ei näy tilaajalle eikä vaikuta laskentaan.
+
+Rivi, jolla on vain arvio, ei siis ole vielä muutospyyntö. Se on luonnos, jolla ei
+voi hyväksyä mitään, riippumatta siitä syntyikö arvio mallilta vai ihmiseltä.
 
 Muutosloki on **append-only**. Rivin sisältöä ei muokata, ja tilasiirtymä on oma
 tapahtumansa. Nykytila johdetaan lokista, ei toisin päin.
@@ -225,7 +244,12 @@ Ei sama asia kuin `toimitettava`, joka on validoitava media-aineisto.
 | `ladattu_at` | timestamptz | |
 | `versio` | int | |
 | `edellinen_versio_id` | uuid, null | Diffin lähtökohta |
-| `tila` | enum | parsimatta, parsittu, parsinta_epaonnistui |
+| `tila` | enum | parsimatta, parsittu, **osittain_parsittu**, parsinta_epaonnistui |
+
+`osittain_parsittu` on olennainen eikä reunatapaus: yksi lataus voi sisältää sekä
+luettavan osan että skannatun liitteen. Luettavasta osasta syntyneet rivit etenevät
+normaalisti tilaajalle asti, eivätkä ne jää odottamaan sitä osaa, joka vaatii käsin
+lukemista. Katso [tiedostot.md](tiedostot.md).
 
 Alkuperäistä tiedostoa ei muokata koskaan. Uusi versio on uusi rivi, ja se synnyttää
 diffin edellistä vasten.
