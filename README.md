@@ -37,7 +37,9 @@ kanssa voi olla antelias.
 | --- | --- |
 | [docs/konsepti.md](docs/konsepti.md) | Ongelma, markkina-aukko, periaatteet, toiminnallisuudet, tekoälyn rooli |
 | [docs/tietomalli.md](docs/tietomalli.md) | Entiteetit, muutosloki, osapuolet ja mandaatti, jäljitettävyys |
+| [docs/tiedostot.md](docs/tiedostot.md) | Miksi jaettu tiedosto on epäonnistumisen merkki, ja mitä ladatuille tiedostoille tapahtuu |
 | [docs/mvp.md](docs/mvp.md) | Testattava hypoteesi, vaiheistus ja mittarit |
+| [mockups/](mockups/) | Visuaaliset luonnokset ja niiden promptit |
 
 ## Tila
 

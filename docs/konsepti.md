@@ -117,6 +117,11 @@ Ei Drive-kansiota, vaan nimetyt paikat: esitysgrafiikat, artistin rider, pohjaku
 Jokaisella paikalla on omistaja, määräaika ja tekniset vaatimukset. Väärä resoluutio
 tai kuvasuhde hylätään latausvaiheessa, ei lavalla.
 
+Tiedosto on sisääntulo, ei säilytysmuoto. Ladattu rider tai ohjelma-Excel parsitaan
+tietueiksi, ja vahvistetussa tuotannossa uusi versio diffataan vanhaa vasten, jolloin
+siitä syntyy muutosrivejä hintalappuineen. Koko logiikka omana lukunaan:
+[tiedostot.md](tiedostot.md).
+
 ### 4.7 Keikkapäivänä näkymä romahtaa
 
 Puhelin, pimeä halli, huono verkko. Näkyviin jää: mikä on seuraavaksi, kuka on missä,

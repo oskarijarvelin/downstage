@@ -35,6 +35,11 @@ erDiagram
     OSAPUOLI ||--o{ PAASY : saa
     OSAPUOLI ||--o{ MUUTOS : ehdottaa
     TOIMITETTAVA }o--|| OSAPUOLI : omistaa
+    LAHDE_DOKUMENTTI ||--o{ TARVE : synnyttaa
+    LAHDE_DOKUMENTTI ||--o{ MUUTOS : synnyttaa
+    LAHDE_DOKUMENTTI ||--o| LAHDE_DOKUMENTTI : edellinen_versio
+    TOIMITETTAVA ||--o{ MERKINTA : sisaltaa
+    VERSIO ||--o{ TULOSTE : ladataan
 ```
 
 `TARVE`, `VARAUS`, `PAASY` ja `TOIMITETTAVA` kiinnittyvät polymorfisesti mihin tahansa
@@ -199,6 +204,65 @@ sopimusehdoksi, joka on kaikkien nähtävillä koko ajan.
 Validointi tapahtuu latausvaiheessa `vaatimukset`-kenttää vasten. Väärä kuvasuhde
 6x3 metrin seinälle hylätään silloin, ei lavalla.
 
+Korvaava lataus ennen `maaraaika`-hetkeä on hiljainen. Sen jälkeen se synnyttää
+`muutos`-rivin. Perustelu: [tiedostot.md](tiedostot.md).
+
+### lahde_dokumentti
+
+Ladattu tiedosto, joka **parsitaan** tietueiksi: rider, ohjelma-Excel, tarjouspyyntö.
+Ei sama asia kuin `toimitettava`, joka on validoitava media-aineisto.
+
+| Kenttä | Tyyppi | Huomio |
+| --- | --- | --- |
+| `id` | uuid | |
+| `tuotanto_id` | uuid | |
+| `kohde_tyyppi`, `kohde_id` | enum, uuid | Mihin tasoon dokumentti liittyy |
+| `tyyppi` | enum | rider, ohjelma, tarjouspyynto, muu |
+| `alkuperainen_nimi` | text | |
+| `tallennus_avain` | text | Viittaus object storageen |
+| `tiiviste` | text | Identtinen uudelleenlataus tunnistetaan tästä |
+| `lataaja_osapuoli_id` | uuid | Kuka tahansa osapuoli voi ladata |
+| `ladattu_at` | timestamptz | |
+| `versio` | int | |
+| `edellinen_versio_id` | uuid, null | Diffin lähtökohta |
+| `tila` | enum | parsimatta, parsittu, parsinta_epaonnistui |
+
+Alkuperäistä tiedostoa ei muokata koskaan. Uusi versio on uusi rivi, ja se synnyttää
+diffin edellistä vasten.
+
+### merkinta
+
+Pohjakuvan päälle piirretty merkintä. Kuva on tausta, merkinnät ovat dataa.
+
+| Kenttä | Tyyppi | Huomio |
+| --- | --- | --- |
+| `id` | uuid | |
+| `toimitettava_id` | uuid | Se pohjakuva, jonka päällä ollaan |
+| `x`, `y` | numeric | Suhteelliset koordinaatit, ei pikseleitä |
+| `teksti` | text | |
+| `viittaus_tyyppi`, `viittaus_id` | enum, uuid, null | Slot tai tarve |
+| `tekija_osapuoli_id` | uuid | |
+| `tila` | enum | voimassa, tarkistettava |
+
+Kun pohjakuvasta ladataan uusi versio, merkinnät eivät katoa vaan siirtyvät tilaan
+`tarkistettava`. Koordinaatit voivat olla väärässä paikassa, mutta sisältö on liian
+arvokasta hävitettäväksi.
+
+### tuloste
+
+Kuka latasi tai tulosti minkä version ja milloin.
+
+| Kenttä | Tyyppi | Huomio |
+| --- | --- | --- |
+| `id` | uuid | |
+| `versio_id` | uuid | Mikä versio otettiin ulos |
+| `mika` | enum | ajolista, patch, kuormalista, tarjous, aikataulu |
+| `osapuoli_id` | uuid | |
+| `at` | timestamptz | |
+
+Tämän ainoa käyttötapaus: keikkapäivänä alusta tietää kuka pitelee vanhentunutta
+paperia, ja voi kertoa siitä. Halpa toteuttaa, ja estää virheen joka näkyy yleisölle.
+
 ### versio
 
 `id`, `tuotanto_id`, `numero`, `snapshot` (jsonb), `hyvaksyja_osapuoli_id`,
@@ -206,7 +270,7 @@ Validointi tapahtuu latausvaiheessa `vaatimukset`-kenttää vasten. Väärä kuv
 
 Hyväksyntä kohdistuu aina versioon, ei "tarjoukseen". Versiot säilyvät.
 
-## Viisi sääntöä
+## Kuusi sääntöä
 
 **1. Jäljitettävyys.** Jokaisella tarpeella on lähde ja lainaus. Malli kirjoittaa
 vain rivejä, joissa `tila = ehdotettu` ja `luoja = malli`. Ihminen siirtää ne
@@ -229,6 +293,11 @@ tietomallisääntö. Tietomalli on aina kolmiportainen. Kun tuotannossa on yksi 
 käyttöliittymä ei näytä paikkatasoa lainkaan. Toisen lisääminen tekee siitä
 navigoitavan ja siirtää sisällön sen alle automaattisesti.
 
+**6. Tiedosto on sisääntulo, ei säilytysmuoto.** Jos kaksi osapuolta muokkaa samaa
+asiaa, se ei ole tiedosto vaan tietue. Ladattu lähdedokumentti parsitaan tietueiksi
+ja säilyy muuttumattomana lähteenä. Tuotokset renderöidään datasta, niitä ei
+säilytetä. Koko logiikka: [tiedostot.md](tiedostot.md).
+
 ## Avoimet kysymykset
 
 - **Kalustorekisteri-integraatio.** Peilataanko ulkoinen kalustokanta paikalliseen
@@ -245,6 +314,10 @@ navigoitavan ja siirtää sisällön sen alle automaattisesti.
 - **Offline-synkronointi.** Keikkapäivänäkymä on offline-first, eli konfliktit ovat
   väistämättömiä. Mikä on ratkaisusääntö kun kaksi ihmistä merkitsee saman asian
   eri tavalla katkon aikana.
+- **Rivien tunnistaminen dokumenttiversioiden välillä.** Diff toimii vain, jos
+  `tarve`-rivit osataan tunnistaa samoiksi riderin versioiden välillä. Muuten versio 2
+  näyttää siltä, että kaikki poistettiin ja lisättiin uudestaan, ja muutosloki täyttyy
+  roskasta. Katso [tiedostot.md](tiedostot.md).
 - **Henkilötiedot.** Vastapuolia on kertaluontoisesti satoja. Säilytysaika,
   poistaminen ja se, mitä vanhentuneelle pääsylinkille tapahtuu, pitää ratkaista
   ennen ensimmäistä oikeaa käyttöä.
