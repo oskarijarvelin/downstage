@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  html, body { margin: 0; padding: 0; }
+  a { color: #8fb8a8; text-decoration: none; }
+  a:hover { color: #d6e4dd; text-decoration: underline; }
+</style>
+</helmet>
+<div style="background: #14161a; color: #e8e6e2; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 13px; line-height: 1.45; min-height: 100%;">
+
+  <header style="display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid #2b3038; background: #1b1e24;">
+    <div style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #6d7480;">Downstage</span>
+      <span style="font-size: 16px; font-weight: 600;">Kevätgaala 2027</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa0aa;">Nordkraft Oy · ke 14.4.2027 · Juhlasali · T‑6</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #7fc2a3; border: 1px solid #2f4a3d; background: #1a2620; border-radius: 2px; padding: 4px 8px;">vahvistettu</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa0aa;">versio 4 · päivitetty 8.4. 09.12</span>
+      <button type="button" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 12px; color: #e8e6e2; background: #21252c; border: 1px solid #343a44; border-radius: 2px; padding: 6px 12px; cursor: pointer;" style-hover="border-color: #55606e;">Jaa näkymä</button>
+    </div>
+  </header>
+
+  <div style="display: grid; grid-template-columns: 1fr; gap: 1px; background: #2b3038;">
+
+    <section style="background: #14161a; padding: 16px 20px 20px;">
+      <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
+        <h2 style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #9aa0aa; font-weight: 500; margin: 0;">Hyväksyntäjono · 4</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6d7480;">odotusaika lasketaan pyyntöhetkestä · 2 myöhässä</span>
+      </div>
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+        <thead>
+          <tr style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6d7480; text-align: left;">
+            <th style="font-weight: 500; padding: 6px 10px 6px 0; border-bottom: 1px solid #2b3038;">Mikä</th>
+            <th style="font-weight: 500; padding: 6px 10px; border-bottom: 1px solid #2b3038;">Odottaa</th>
+            <th style="font-weight: 500; padding: 6px 10px; border-bottom: 1px solid #2b3038;">Pyytäjä</th>
+            <th style="font-weight: 500; padding: 6px 10px; border-bottom: 1px solid #2b3038; text-align: right;">Vaikutus</th>
+            <th style="font-weight: 500; padding: 6px 10px; border-bottom: 1px solid #2b3038; text-align: right;">Odottanut</th>
+            <th style="font-weight: 500; padding: 6px 0 6px 10px; border-bottom: 1px solid #2b3038; text-align: right;">Toimi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <sc-for list="{{ jono }}" as="rivi" hint-placeholder-count="4">
+            <tr style="border-bottom: 1px solid #21252c;">
+              <td style="padding: 9px 10px 9px 0; vertical-align: top;">
+                <span style="font-weight: 500;">{{ rivi.mika }}</span>
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6d7480; display: block;">{{ rivi.tarkenne }}</span>
+              </td>
+              <td style="padding: 9px 10px; vertical-align: top;">{{ rivi.odottaa }}</td>
+              <td style="padding: 9px 10px; vertical-align: top; color: #9aa0aa;">{{ rivi.pyytaja }}</td>
+              <td style="padding: 9px 10px; vertical-align: top; text-align: right; font-family: 'IBM Plex Mono', monospace;">{{ rivi.vaikutus }}</td>
+              <td style="padding: 9px 10px; vertical-align: top; text-align: right; font-family: 'IBM Plex Mono', monospace;">
+                <span style="{{ rivi.odottanutStyle }}">{{ rivi.odottanut }}</span>
+              </td>
+              <td style="padding: 9px 0 9px 10px; vertical-align: top; text-align: right;">
+                <button type="button" onClick="{{ rivi.muistuta }}" style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #e8e6e2; background: #21252c; border: 1px solid #343a44; border-radius: 2px; padding: 5px 10px; cursor: pointer; white-space: nowrap;" style-hover="border-color: #55606e;">{{ rivi.nappi }}</button>
+              </td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </section>
+
+    <div style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 1px; background: #2b3038;">
+
+      <section style="background: #14161a; padding: 16px 20px 22px;">
+        <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
+          <h2 style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #9aa0aa; font-weight: 500; margin: 0;">Aikataulu · ke 14.4.</h2>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6d7480;">{{ aikatauluHuomio }}</span>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 12.5px;">
+          <thead>
+            <tr style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6d7480; text-align: left;">
+              <th style="font-weight: 500; padding: 6px 10px 6px 0; border-bottom: 1px solid #2b3038;">Klo</th>
+              <th style="font-weight: 500; padding: 6px 8px; border-bottom: 1px solid #2b3038;">Kesto</th>
+              <th style="font-weight: 500; padding: 6px 8px; border-bottom: 1px solid #2b3038;">Mitä</th>
+              <th style="font-weight: 500; padding: 6px 8px; border-bottom: 1px solid #2b3038;">Tyyppi</th>
+              <th style="font-weight: 500; padding: 6px 8px; border-bottom: 1px solid #2b3038;">Asiakkaalle</th>
+              <th style="font-weight: 500; padding: 6px 0 6px 8px; border-bottom: 1px solid #2b3038;">Riippuvuus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{ aikataulu }}" as="r" hint-placeholder-count="9">
+              <tr style="{{ r.rowStyle }}">
+                <td style="padding: 8px 10px 8px 0; font-family: 'IBM Plex Mono', monospace; white-space: nowrap;">{{ r.klo }}</td>
+                <td style="padding: 8px 8px; font-family: 'IBM Plex Mono', monospace; color: #9aa0aa; white-space: nowrap;">{{ r.kesto }}</td>
+                <td style="padding: 8px 8px;">{{ r.mita }}</td>
+                <td style="padding: 8px 8px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa0aa;">{{ r.tyyppi }}</td>
+                <td style="padding: 8px 8px; font-family: 'IBM Plex Mono', monospace; font-size: 11px;">
+                  <span style="{{ r.nakyvyysStyle }}">{{ r.nakyvyys }}</span>
+                </td>
+                <td style="padding: 8px 0 8px 8px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6d7480;">{{ r.riippuvuus }}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+
+        <div style="margin-top: 20px; border-top: 1px solid #2b3038; padding-top: 14px;">
+          <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
+            <h2 style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #9aa0aa; font-weight: 500; margin: 0;">Toimitettavat · 5</h2>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6d7480;">1 myöhässä · muistutus lähtee yhdellä klikkauksella</span>
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 12.5px;">
+            <tbody>
+              <sc-for list="{{ toimitettavat }}" as="t" hint-placeholder-count="5">
+                <tr style="border-bottom: 1px solid #21252c;">
+                  <td style="padding: 8px 10px 8px 0;">
+                    <span>{{ t.nimi }}</span>
+                    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6d7480; display: block;">{{ t.vaatimus }}</span>
+                  </td>
+                  <td style="padding: 8px 8px; color: #9aa0aa; white-space: nowrap;">{{ t.omistaja }}</td>
+                  <td style="padding: 8px 8px; font-family: 'IBM Plex Mono', monospace; white-space: nowrap;">{{ t.maaraaika }}</td>
+                  <td style="padding: 8px 8px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; white-space: nowrap;">
+                    <span style="{{ t.tilaStyle }}">{{ t.tila }}</span>
+                  </td>
+                  <td style="padding: 8px 0 8px 8px; text-align: right;">
+                    <sc-if value="{{ t.muistutettavissa }}" hint-placeholder-val="{{ false }}">
+                      <button type="button" onClick="{{ t.muistuta }}" style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #e8e6e2; background: #21252c; border: 1px solid #343a44; border-radius: 2px; padding: 5px 10px; cursor: pointer; white-space: nowrap;" style-hover="border-color: #55606e;">{{ t.nappi }}</button>
+                    </sc-if>
+                  </td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section style="background: #14161a; padding: 16px 20px 22px;">
+        <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
+          <h2 style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #9aa0aa; font-weight: 500; margin: 0;">Tarvelista</h2>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6d7480;">{{ tarveYhteenveto }}</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <sc-for list="{{ kategoriat }}" as="kat" hint-placeholder-count="6">
+            <div>
+              <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #6d7480; border-bottom: 1px solid #2b3038; padding-bottom: 5px; margin-bottom: 2px; display: flex; justify-content: space-between;">
+                <span>{{ kat.nimi }}</span>
+                <span>{{ kat.meta }}</span>
+              </div>
+              <sc-for list="{{ kat.rivit }}" as="t" hint-placeholder-count="3">
+                <div style="{{ t.wrapStyle }}">
+                  <div style="display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: baseline; padding: 7px 8px 7px 0;">
+                    <span style="{{ t.nimiStyle }}">{{ t.kuvaus }}</span>
+                    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #c9cdd4; white-space: nowrap;">{{ t.maara }}</span>
+                    <sc-if value="{{ t.ehdotettu }}" hint-placeholder-val="{{ true }}">
+                      <button type="button" onClick="{{ t.avaa }}" style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: #e0b57a; background: #241f18; border: 1px solid #4a3c26; border-radius: 2px; padding: 3px 7px; cursor: pointer; white-space: nowrap;" style-hover="border-color: #7a6440;">{{ t.tilaLabel }}</button>
+                    </sc-if>
+                    <sc-if value="{{ t.paatetty }}" hint-placeholder-val="{{ false }}">
+                      <span style="{{ t.tilaStyle }}">{{ t.tilaLabel }}</span>
+                    </sc-if>
+                  </div>
+
+                  <sc-if value="{{ t.auki }}" hint-placeholder-val="{{ false }}">
+                    <div style="border: 1px solid #343a44; border-left: 2px solid #7a6440; background: #191d23; border-radius: 2px; margin: 2px 0 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 10px;">
+                      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #9aa0aa;">
+                        <span>{{ t.lahde }}</span>
+                        <span style="color: #6d7480;">{{ t.parsittu }}</span>
+                      </div>
+                      <blockquote style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.55; color: #e8e6e2; background: #101317; border: 1px solid #262b33; border-radius: 2px; padding: 10px 12px;">{{ t.lainaus }}</blockquote>
+                      <div style="display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #9aa0aa;">
+                        <span>{{ t.diff }}</span>
+                        <span>{{ t.hinta }}</span>
+                      </div>
+                      <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                        <button type="button" onClick="{{ t.vahvista }}" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 12px; font-weight: 500; color: #0f1512; background: #7fc2a3; border: 1px solid #7fc2a3; border-radius: 2px; padding: 7px 12px; cursor: pointer;" style-hover="background: #a2d6bd;">Vahvista</button>
+                        <button type="button" onClick="{{ t.hylkaa }}" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 12px; color: #e8e6e2; background: transparent; border: 1px solid #343a44; border-radius: 2px; padding: 7px 12px; cursor: pointer;" style-hover="border-color: #55606e;">Hylkää</button>
+                        <button type="button" onClick="{{ t.avaaDokumentti }}" style="font-family: 'IBM Plex Sans', sans-serif; font-size: 12px; color: #9aa0aa; background: transparent; border: 0; padding: 7px 4px; cursor: pointer; text-decoration: underline;">Avaa koko dokumentti</button>
+                        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #6d7480; margin-left: auto;">{{ t.vihje }}</span>
+                      </div>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="margin-top: 18px; border-top: 1px solid #2b3038; padding-top: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6d7480; display: flex; flex-direction: column; gap: 4px;">
+          <span>Ehdotetut rivit tulevat mallilta luonnoksina. Vahvistamaton rivi ei vaikuta laskentaan.</span>
+          <span>Virrat, painot ja miehitystunnit laskee laskentakerros, ei malli.</span>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 1100}}">
+class Component extends DCLogic {
+  state = {
+    auki: "aani-mikit",
+    tilat: {},
+    muistutukset: {},
+    dokumentti: null
+  };
+
+  aseta(id, tila) {
+    this.setState(p => ({ tilat: Object.assign({}, p.tilat, { [id]: tila }), auki: p.auki === id ? null : p.auki }));
+  }
+
+  componentDidMount() {
+    this.kasittelija = e => {
+      const id = this.state.auki;
+      if (!id || e.metaKey || e.ctrlKey) return;
+      const k = e.key.toLowerCase();
+      if (k === "v") { e.preventDefault(); this.aseta(id, "vahvistettu"); }
+      if (k === "h") { e.preventDefault(); this.aseta(id, "hylatty"); }
+      if (e.key === "Escape") this.setState({ auki: null });
+    };
+    window.addEventListener("keydown", this.kasittelija);
+  }
+
+  componentWillUnmount() { window.removeEventListener("keydown", this.kasittelija); }
+
+  tarve(t) {
+    const tila = this.state.tilat[t.id] || t.tila;
+    const ehdotettu = tila === "ehdotettu";
+    const auki = ehdotettu && this.state.auki === t.id;
+    const vari = tila === "vahvistettu" ? "#7fc2a3" : tila === "hylatty" ? "#6d7480" : "#e0b57a";
+    return Object.assign({}, t, {
+      ehdotettu,
+      paatetty: !ehdotettu,
+      auki,
+      tilaLabel: tila === "vahvistettu" ? "vahvistettu" : tila === "hylatty" ? "hylätty" : auki ? "ehdotettu ▾" : "ehdotettu ▸",
+      tilaStyle: "font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: " + vari + "; white-space: nowrap;",
+      nimiStyle: "font-size: 12.5px; color: " + (tila === "hylatty" ? "#6d7480" : "#e8e6e2") + "; text-decoration: " + (tila === "hylatty" ? "line-through" : "none") + ";",
+      wrapStyle: "border-bottom: 1px solid #1e2228;" + (auki ? " background: #171b20;" : ""),
+      vihje: "V vahvista · H hylkää · Esc sulje",
+      avaa: () => this.setState(p => ({ auki: p.auki === t.id ? null : t.id })),
+      vahvista: () => this.aseta(t.id, "vahvistettu"),
+      hylkaa: () => this.aseta(t.id, "hylatty"),
+      avaaDokumentti: () => this.setState({ dokumentti: t.id })
+    });
+  }
+
+  renderVals() {
+    const tilat = this.state.tilat;
+    const riderVahvistettu = ["aani-mikit", "aani-monitorit"].every(id => tilat[id] === "vahvistettu");
+    const muistutus = k => this.state.muistutukset[k];
+    const setMuistutus = k => () => this.setState(p => ({ muistutukset: Object.assign({}, p.muistutukset, { [k]: true }) }));
+    const myohassa = "color: #e0b57a;";
+
+    const kategoriat = [
+      { nimi: "Ääni", meta: "2 ehdotettua", rivit: [
+        { id: "aani-mikit", kuvaus: "Langattomat käsimikrofonit", maara: "4 kpl", tila: "ehdotettu", lahde: "Rider v2 · s. 2 · input list", parsittu: "parsittu 20.3. 11.04", lainaus: "4 × handheld wireless (SM58 capsule or equivalent), 2 × spare battery per unit, talkback line to FOH.", diff: "v1: 2 kpl → v2: 4 kpl", hinta: "kustannusvaikutus +180 €" },
+        { id: "aani-monitorit", kuvaus: "Monitorilinjat", maara: "6 kpl", tila: "ehdotettu", lahde: "Rider v2 · s. 3 · monitoring", parsittu: "parsittu 20.3. 11.04", lainaus: "Monitoring: 6 sends total — 4 × wedge on stage, 2 × IEM feed from FOH position.", diff: "v1: 4 linjaa → v2: 6 linjaa", hinta: "kustannusvaikutus +240 €" },
+        { id: "aani-foh", kuvaus: "FOH-miksauspaikka, digipöytä 32ch", maara: "1", tila: "vahvistettu" },
+        { id: "aani-headset", kuvaus: "Puhujamikrofonit, headset", maara: "2 kpl", tila: "vahvistettu" }
+      ] },
+      { nimi: "Valo", meta: "vahvistettu", rivit: [
+        { id: "valo-etu", kuvaus: "Etuvalo puhujapaikalle", maara: "4 kpl", tila: "vahvistettu" },
+        { id: "valo-profiilit", kuvaus: "Liikkuvat profiilit", maara: "8 kpl", tila: "vahvistettu" }
+      ] },
+      { nimi: "Video", meta: "1 ehdotettu", rivit: [
+        { id: "video-led", kuvaus: "LED-seinä 6 × 3 m, 3,9 mm", maara: "1", tila: "vahvistettu" },
+        { id: "video-striimi", kuvaus: "Striimauspaketti, 2 kameraa + enkooderi", maara: "1", tila: "ehdotettu", lahde: "Viesti 2.4. · Marja Lehtinen", parsittu: "luettu 2.4. 14.51", lainaus: "Toimitusjohtaja kysyi, voitaisiinko gaala striimata niille noin sadalle, jotka eivät pääse paikalle. Tarvitaan varmaan jotain kevyttä?", diff: "uusi tarve · ei riderissa", hinta: "kustannusvaikutus +1 450 € · eskaloitu Timo Rasille" }
+      ] },
+      { nimi: "Virta", meta: "laskettu", rivit: [
+        { id: "virta-syotto", kuvaus: "Syöttö 63 A / 3-vaihe, jakokeskus", maara: "1", tila: "vahvistettu" },
+        { id: "virta-kulutus", kuvaus: "Laskettu huippukulutus", maara: "41,2 A", tila: "vahvistettu" }
+      ] },
+      { nimi: "Rigi", meta: "vahvistettu", rivit: [
+        { id: "rigi-pisteet", kuvaus: "Ripustuspisteet, 250 kg / piste", maara: "6 kpl", tila: "vahvistettu" }
+      ] },
+      { nimi: "Henkilöstö", meta: "1 ehdotettu", rivit: [
+        { id: "hlo-aani", kuvaus: "Ääniteknikko", maara: "2 × 14 h", tila: "vahvistettu" },
+        { id: "hlo-valo", kuvaus: "Valoteknikko", maara: "1 × 12 h", tila: "vahvistettu" },
+        { id: "hlo-monitori", kuvaus: "Monitoriteknikko soundcheckiin", maara: "1 × 4 h", tila: "ehdotettu", lahde: "Rider v2 · s. 3 · monitoring", parsittu: "parsittu 20.3. 11.04", lainaus: "Monitor engineer requested for soundcheck and show if more than 4 sends are used.", diff: "seuraa monitorilinjoista 4 → 6", hinta: "sisältyy riviin +240 €" },
+        { id: "hlo-lava", kuvaus: "Lavamies", maara: "2 × 10 h", tila: "vahvistettu" }
+      ] }
+    ].map(k => Object.assign({}, k, { rivit: k.rivit.map(t => this.tarve(t)) }));
+
+    const ehdotettujaJaljella = kategoriat.reduce((n, k) => n + k.rivit.filter(r => r.ehdotettu).length, 0);
+
+    return {
+      kategoriat,
+      tarveYhteenveto: ehdotettujaJaljella + " ehdotettua · 13 vahvistettua · lähde näkyy jokaisella",
+      aikatauluHuomio: riderVahvistettu ? "soundcheck 75 min · kasaus siirtyi vahvistuksen mukana" : "harmaat rivit eivät näy asiakkaalle",
+      jono: [
+        { mika: "Riderin päivitys 20.3.", tarkenne: "3 riviä · yksi päätös", odottaa: "Marja Lehtinen (tilaaja)", pyytaja: "bändin tuotantopäällikkö", vaikutus: "+420 €", odottanut: "19 pv", odottanutStyle: myohassa, nappi: muistutus("rider") ? "muistutettu 8.4." : "Muistuta", muistuta: setMuistutus("rider") },
+        { mika: "Striimaus lisätään", tarkenne: "eskaloitu 2.4. · ylittää mandaattikaton 1 500 €", odottaa: "Timo Rasi (markkinointijohtaja)", pyytaja: "Marja Lehtinen", vaikutus: "+1 450 €", odottanut: "6 pv", odottanutStyle: myohassa, nappi: muistutus("striimi") ? "muistutettu 8.4." : "Muistuta", muistuta: setMuistutus("striimi") },
+        { mika: "Lopullinen ohjelma", tarkenne: "päätöskohta · oletus: versio 4 jää voimaan", odottaa: "Marja Lehtinen (tilaaja)", pyytaja: "Downstage-tuotanto", vaikutus: "määräaika 11.4.", odottanut: "3 pv jäljellä", odottanutStyle: "", nappi: muistutus("ohjelma") ? "muistutettu 8.4." : "Muistuta", muistuta: setMuistutus("ohjelma") },
+        { mika: "Esitysgrafiikat", tarkenne: "2/3 saapunut · yksi puuttuu", odottaa: "Nordkraftin markkinointi", pyytaja: "Downstage-tuotanto", vaikutus: "määräaika 13.4.", odottanut: "5 pv jäljellä", odottanutStyle: "", nappi: muistutus("grafiikat") ? "muistutettu 8.4." : "Muistuta", muistuta: setMuistutus("grafiikat") }
+      ],
+      aikataulu: [
+        { klo: "08:00", kesto: "5 h", mita: "Kasaus alkaa", tyyppi: "tekninen", nakyvyys: "näkyy", riippuvuus: "rigi ennen valoa" },
+        { klo: "12:30", kesto: "30 min", mita: "Kasaus valmis, tarkistus", tyyppi: "tekninen", nakyvyys: "piilotettu", riippuvuus: "ehto soundcheckille" },
+        { klo: "13:00", kesto: "60 min", mita: "Äänen soundcheck, järjestelmä", tyyppi: "tekninen", nakyvyys: "piilotettu", riippuvuus: "kasaus valmis 12:30" },
+        { klo: riderVahvistettu ? "14:30" : "15:00", kesto: riderVahvistettu ? "75 min" : "45 min", mita: "Bändin soundcheck", tyyppi: "tekninen", nakyvyys: "näkyy", riippuvuus: riderVahvistettu ? "rider v2 · +30 min" : "rider v2 ehdottaa +30 min" },
+        { klo: "16:30", kesto: "30 min", mita: "Puhujan läpimeno", tyyppi: "tekninen", nakyvyys: "näkyy", riippuvuus: "kalvot toimitettu" },
+        { klo: "17:30", kesto: "45 min", mita: "Ovet", tyyppi: "tekninen", nakyvyys: "näkyy", riippuvuus: "sali siivottu" },
+        { klo: "18:15", kesto: "15 min", mita: "Toimitusjohtajan puhe", tyyppi: "puhe", nakyvyys: "näkyy", riippuvuus: "kalvot, headset" },
+        { klo: "18:30", kesto: "5 min", mita: "Vaihto", tyyppi: "vaihto", nakyvyys: "piilotettu", riippuvuus: "" },
+        { klo: "18:35", kesto: "40 min", mita: "Palkintojen jako", tyyppi: "esitys", nakyvyys: "näkyy", riippuvuus: "kuvasarja" },
+        { klo: "19:15", kesto: "15 min", mita: "Vaihto bändille", tyyppi: "vaihto", nakyvyys: "piilotettu", riippuvuus: "backline lavalle" },
+        { klo: "19:30", kesto: "60 min", mita: "Bändi", tyyppi: "esitys", nakyvyys: "näkyy", riippuvuus: "6 monitorilinjaa" },
+        { klo: "22:00", kesto: "3 h", mita: "Purku alkaa", tyyppi: "tekninen", nakyvyys: "näkyy", riippuvuus: "sali tyhjä 21:45" }
+      ].map(r => Object.assign({}, r, {
+        rowStyle: "border-bottom: 1px solid #21252c;" + (r.nakyvyys === "piilotettu" ? " color: #79808b; background: #171a1f;" : ""),
+        nakyvyysStyle: r.nakyvyys === "piilotettu" ? "color: #6d7480;" : "color: #7fc2a3;"
+      })),
+      toimitettavat: [
+        { nimi: "Toimitusjohtajan puheen kalvot", vaatimus: "16:9 · väh. 1920×1080 · PDF tai PNG", omistaja: "Nordkraftin markkinointi", maaraaika: "13.4.", tila: "myöhässä 2 pv", tilaStyle: "color: #e0b57a;", muistutettavissa: true, nappi: muistutus("kalvot") ? "muistutettu 09.14" : "Muistuta", muistuta: setMuistutus("kalvot") },
+        { nimi: "Palkintojenjaon kuvasarja", vaatimus: "16:9 · 1920×1080 · tarkistettu", omistaja: "Nordkraftin markkinointi", maaraaika: "13.4.", tila: "saapunut", tilaStyle: "color: #7fc2a3;", muistutettavissa: false, nappi: "" },
+        { nimi: "Gaalan avausvideo", vaatimus: "1920×1080 · 24 s · ProRes", omistaja: "Nordkraftin markkinointi", maaraaika: "10.4.", tila: "saapunut", tilaStyle: "color: #7fc2a3;", muistutettavissa: false, nappi: "" },
+        { nimi: "Bändin rider", vaatimus: "versio 2 · parsittu, 3 muutosriviä", omistaja: "Bändin tuotantopäällikkö", maaraaika: "31.3.", tila: "saapunut", tilaStyle: "color: #7fc2a3;", muistutettavissa: false, nappi: "" },
+        { nimi: "Juhlasalin pohjakuva", vaatimus: "PDF · 4 merkintää · 1 tarkistettava", omistaja: "Downstage-tuotanto", maaraaika: "3.3.", tila: "saapunut", tilaStyle: "color: #7fc2a3;", muistutettavissa: true, nappi: muistutus("pohja") ? "merkitty" : "Tarkista" , muistuta: setMuistutus("pohja") }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
