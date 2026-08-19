@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  html, body { margin: 0; padding: 0; }
+  a { color: #8fb8a8; text-decoration: none; }
+  a:hover { color: #d6e4dd; text-decoration: underline; }
+</style>
+</helmet>
+<div style="background: #14161a; color: #e8e6e2; font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, system-ui, sans-serif; font-size: 13px; line-height: 1.45; min-height: 100%;">
+
+  <header style="display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid #2b3038; background: #1b1e24;">
+    <div style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;">
+      <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #6d7480;">Downstage</span>
+      <span style="font-size: 16px; font-weight: 600;">Kevätgaala 2027</span>
+      <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #9aa0aa;">Nordkraft Oy · ke 14.4.2027 · Juhlasali · T‑6</span>
+    </div>
+    <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #e0b57a;">1 tiedosto vaatii sinua</span>
+  </header>
+
+  <div style="display: grid; grid-template-columns: 1.05fr 1fr; gap: 1px; background: #2b3038;">
+
+    <section style="background: #14161a; padding: 16px 20px 22px;">
+      <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 10px;">
+        <h2 style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #9aa0aa; font-weight: 500; margin: 0;">Lähdedokumentit · sama lataus 20.3.</h2>
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #6d7480;">alkuperäistä tiedostoa ei muokata koskaan</span>
+      </div>
+      <table style="width: 100%; border-collapse: collapse; font-size: 12.5px;">
+        <thead>
+          <tr style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6d7480; text-align: left;">
+            <th style="font-weight: 500; padding: 6px 10px 6px 0; border-bottom: 1px solid #2b3038;">Tiedosto</th>
+            <th style="font-weight: 500; padding: 6px 10px; border-bottom: 1px solid #2b3038;">Lataaja</th>
+            <th style="font-weight: 500; padding: 6px 10px; border-bottom: 1px solid #2b3038;">Tila</th>
+            <th style="font-weight: 500; padding: 6px 0 6px 10px; border-bottom: 1px solid #2b3038; text-align: right;">Tuotti</th>
+          </tr>
+        </thead>
+        <tbody>
+          <sc-for list="{{ dokumentit }}" as="d" hint-placeholder-count="4">
+            <tr style="border-bottom: 1px solid #21252c;">
+              <td style="padding: 10px 10px 10px 0; vertical-align: top;">
+                <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 12px;">{{ d.nimi }}</span>
+                <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #6d7480; display: block;">{{ d.meta }}</span>
+              </td>
+              <td style="padding: 10px; vertical-align: top; color: #9aa0aa;">{{ d.lataaja }}</td>
+              <td style="padding: 10px; vertical-align: top; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px;">
+                <sc-if value="{{ d.ok }}" hint-placeholder-val="{{ true }}">
+                  <span style="color: #7fc2a3; letter-spacing: 0.08em; text-transform: uppercase;">{{ d.tila }}</span>
+                </sc-if>
+                <sc-if value="{{ d.virhe }}" hint-placeholder-val="{{ false }}">
+                  <span style="color: #e0b57a; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid #4a3c26; background: #241f18; border-radius: 2px; padding: 3px 7px;">{{ d.tila }}</span>
+                </sc-if>
+              </td>
+              <td style="padding: 10px 0 10px 10px; vertical-align: top; text-align: right; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #9aa0aa;">{{ d.tuotti }}</td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+      <p style="margin: 14px 0 0; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #6d7480; line-height: 1.6;">Identtinen uudelleenlataus tunnistetaan tiivisteestä eikä tuota rivejä. Epäonnistunut parsinta ei tuota rivejä lainkaan, eikä malli arvaa sisältöä.</p>
+    </section>
+
+    <section style="background: #14161a; padding: 16px 20px 22px; display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px;">
+        <h2 style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #9aa0aa; font-weight: 500; margin: 0;">Tehtäväsi · 1</h2>
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #6d7480;">syntyi automaattisesti 20.3. 11.05</span>
+      </div>
+
+      <article style="border: 1px solid #4a3c26; background: #191d23; border-radius: 3px; overflow: hidden;">
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center; padding: 10px 14px; background: #241f18; border-bottom: 1px solid #4a3c26;">
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #e0b57a;">Parsinta epäonnistui</span>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #9aa0aa;">tila: parsimatta</span>
+        </div>
+        <div style="padding: 14px; display: flex; flex-direction: column; gap: 14px;">
+          <div>
+            <div style="font-size: 15px; font-weight: 600; margin-bottom: 4px;">Lue backline käsin ja kirjaa rivit</div>
+            <div style="font-size: 12.5px; color: #c9cdd4;">Tiedosto on skannattu kuva ilman tekstikerrosta. Malli ei tuottanut yhtään tarvetta, eikä se ehdottanut mitään arvausta.</div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 96px 1fr; gap: 12px; align-items: stretch; border: 1px solid #343a44; background: #101317; border-radius: 2px; padding: 12px;">
+            <div style="background: repeating-linear-gradient(135deg, #1d222a 0 6px, #171b21 6px 12px); border: 1px solid #2b3038; border-radius: 2px; display: flex; align-items: flex-end; justify-content: center; padding: 6px; min-height: 118px;">
+              <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 9px; letter-spacing: 0.08em; color: #6d7480; text-align: center;">skannattu sivu</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #9aa0aa;">
+              <span style="font-size: 12px; color: #e8e6e2;">backline_skannattu.pdf</span>
+              <span>3 sivua · 4,1 MB · ei tekstikerrosta</span>
+              <span>latasi bändin tuotantopäällikkö 20.3. 11.04</span>
+              <span>liittyy: bändin esitys 19:30</span>
+              <span style="color: #6d7480;">tiiviste 9f21c4… · alkuperäinen säilyy</span>
+              <a href="#" style="margin-top: 4px;">Avaa liite</a>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+            <button type="button" style="font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; font-weight: 500; color: #0f1512; background: #7fc2a3; border: 1px solid #7fc2a3; border-radius: 2px; padding: 8px 13px; cursor: pointer;" style-hover="background: #a2d6bd;">Kirjaa rivit käsin</button>
+            <button type="button" style="font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; color: #e8e6e2; background: transparent; border: 1px solid #343a44; border-radius: 2px; padding: 8px 13px; cursor: pointer;" style-hover="border-color: #55606e;">Pyydä luettava versio</button>
+            <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; color: #6d7480; margin-left: auto;">käsin kirjattu rivi on kelvollinen lopputulos</span>
+          </div>
+
+          <div style="border-top: 1px solid #2b3038; padding-top: 12px; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #6d7480; line-height: 1.6;">
+            Rider v2:n kolme muutosriviä eivät odota tätä. Ne ovat jo tilaajalla, koska ne tulivat luettavasta osasta samaa latausta.
+          </div>
+        </div>
+      </article>
+
+      <div style="border: 1px solid #2b3038; border-radius: 3px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa0aa;">Mitä lataaja näkee</span>
+        <span style="font-size: 12.5px; color: #c9cdd4;">Bändin tuotantopäällikölle näkyy oma latauksensa ja huomio, että yksi liite on tuottajalla luettavana käsin. Hän ei näe tehtävääsi eikä sen tilaa.</span>
+      </div>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 620}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      dokumentit: [
+        { nimi: "rider_kevatgaala_v2.pdf", meta: "8 sivua · 1,8 MB · versio 2, edellinen 12.2.", lataaja: "bändin tuotantopäällikkö", tila: "parsittu", ok: true, virhe: false, tuotti: "3 muutosriviä" },
+        { nimi: "backline_skannattu.pdf", meta: "3 sivua · 4,1 MB · ei tekstikerrosta", lataaja: "bändin tuotantopäällikkö", tila: "parsimatta", ok: false, virhe: true, tuotti: "0 riviä · tehtävä tuottajalle" },
+        { nimi: "ohjelma_nordkraft_v4.xlsx", meta: "1 välilehti · 42 kB · versio 4", lataaja: "Marja Lehtinen", tila: "parsittu", ok: true, virhe: false, tuotti: "9 slottia" },
+        { nimi: "juhlasali_pohja.pdf", meta: "1 sivu · 2,2 MB · tausta merkinnöille", lataaja: "Downstage-tuotanto", tila: "parsittu", ok: true, virhe: false, tuotti: "4 merkintää" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

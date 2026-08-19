@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  html, body { margin: 0; padding: 0; }
+  a { color: #2f4f3f; text-decoration: none; }
+  a:hover { color: #191713; text-decoration: underline; }
+</style>
+</helmet>
+<div style="background: #f7f4ef; color: #191713; font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, system-ui, sans-serif; font-size: 16px; line-height: 1.5; min-height: 100%; padding: 40px 44px 56px; box-sizing: border-box; text-wrap: pretty;">
+  <div style="max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px;">
+
+    <header style="display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: flex-end; justify-content: space-between; border-bottom: 1px solid #e2ddd3; padding-bottom: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8a8378;">Downstage · sama linkki, tapahtuman jälkeen</span>
+        <h1 style="font-family: Newsreader, 'Iowan Old Style', Georgia, serif; font-weight: 500; font-size: 40px; line-height: 1.05; margin: 0;">Laskuerittely</h1>
+        <span style="font-size: 16px; color: #57514a;">Kevätgaala 2027 · Nordkraft Oy · ajettu 14.4.2027</span>
+      </div>
+      <div style="text-align: right; display: flex; flex-direction: column; gap: 4px;">
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 28px;">14 270 €</span>
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #8a8378;">alv 0 % · eräpäivä 30.4.2027</span>
+      </div>
+    </header>
+
+    <p style="margin: 0; font-family: Newsreader, 'Iowan Old Style', Georgia, serif; font-size: 21px; line-height: 1.45; max-width: 640px;">Jokainen rivi tulee muutoslokista. Pyytäjä, hyväksyjä ja aikaleima ovat samat, jotka näkyivät tässä näkymässä silloin kun päätös tehtiin.</p>
+
+    <table style="width: 100%; border-collapse: collapse; background: #fffdfa; border: 1px solid #e2ddd3; border-radius: 3px; overflow: hidden;">
+      <thead>
+        <tr style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #8a8378; text-align: left; background: #f2ece0;">
+          <th style="font-weight: 500; padding: 11px 18px; border-bottom: 1px solid #e2ddd3;">Rivi</th>
+          <th style="font-weight: 500; padding: 11px 14px; border-bottom: 1px solid #e2ddd3;">Peruste</th>
+          <th style="font-weight: 500; padding: 11px 14px; border-bottom: 1px solid #e2ddd3;">Pyysi</th>
+          <th style="font-weight: 500; padding: 11px 14px; border-bottom: 1px solid #e2ddd3;">Hyväksyi</th>
+          <th style="font-weight: 500; padding: 11px 18px; border-bottom: 1px solid #e2ddd3; text-align: right;">Summa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <sc-for list="{{ rivit }}" as="r" hint-placeholder-count="5">
+          <tr style="border-bottom: 1px solid #efe9de; vertical-align: top;">
+            <td style="padding: 15px 18px;">
+              <span style="font-size: 17px; font-weight: 500;">{{ r.nimi }}</span>
+              <span style="display: block; font-size: 13px; color: #57514a; margin-top: 3px;">{{ r.tarkenne }}</span>
+            </td>
+            <td style="padding: 15px 14px; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #8a8378;">{{ r.peruste }}</td>
+            <td style="padding: 15px 14px; font-size: 14px; color: #3f3a34;">{{ r.pyysi }}</td>
+            <td style="padding: 15px 14px; font-size: 14px; color: #3f3a34;">{{ r.hyvaksyi }}</td>
+            <td style="padding: 15px 18px; text-align: right; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 16px; white-space: nowrap;">{{ r.summa }}</td>
+          </tr>
+        </sc-for>
+        <tr style="background: #f9f5ec;">
+          <td colspan="4" style="padding: 16px 18px; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #7a6f5f;">Yhteensä · 1 perustoimitus, 4 muutosta</td>
+          <td style="padding: 16px 18px; text-align: right; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 20px;">14 270 €</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px;">
+      <div style="background: #fffdfa; border: 1px solid #e2ddd3; border-radius: 3px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a8378;">Ei yhtään erikseen perusteltavaa riviä</span>
+        <span style="font-size: 15px;">Kaikki neljä muutosta oli hyväksytty ennen tapahtumaa, ja hyväksyntä näkyi tässä samassa näkymässä silloin kun se tehtiin.</span>
+      </div>
+      <div style="background: #fffdfa; border: 1px solid #e2ddd3; border-radius: 3px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a8378;">Oletus ei laukennut</span>
+        <span style="font-size: 15px;">Lopullinen ohjelma vahvistettiin 8.4., kolme päivää ennen määräaikaa, joten versio 4 ei jäänyt voimaan oletuksena eikä erikseen laskutettavia jälkimuutoksia syntynyt.</span>
+      </div>
+      <div style="background: #fffdfa; border: 1px solid #e2ddd3; border-radius: 3px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a8378;">Liitteet</span>
+        <a href="#" style="font-size: 15px;">Muutosloki kokonaisuudessaan</a>
+        <a href="#" style="font-size: 15px;">Loppuraportti ja pohja ensi vuodelle</a>
+      </div>
+    </div>
+
+    <footer style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #8a8378; border-top: 1px solid #e2ddd3; padding-top: 16px; display: flex; flex-wrap: wrap; gap: 6px 20px;">
+      <span>Muodostettu muutoslokista 15.4. klo 08.30</span>
+      <span>Ohjelma versio 5 · ajettu</span>
+      <span>Linkki vanhenee 14.6.2027</span>
+    </footer>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 940}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      rivit: [
+        { nimi: "Perustoimitus", tarkenne: "Ääni, valo, video, virta, rigi ja miehitys tarjouksen mukaan", peruste: "tarjous v4 · hyväksytty 12.2.", pyysi: "Nordkraft Oy", hyvaksyi: "Marja Lehtinen", summa: "12 400 €" },
+        { nimi: "Langattomia mikrofoneja 2 → 4", tarkenne: "Riderin päivitys 20.3., ryhmä 1/3", peruste: "muutos #14 · rider v2", pyysi: "Bändin tuotantopäällikkö", hyvaksyi: "Marja Lehtinen 8.4.", summa: "180 €" },
+        { nimi: "Monitorilinjoja 4 → 6", tarkenne: "Riderin päivitys 20.3., ryhmä 2/3 · sisältää monitoriteknikon 4 h", peruste: "muutos #15 · rider v2", pyysi: "Bändin tuotantopäällikkö", hyvaksyi: "Marja Lehtinen 8.4.", summa: "240 €" },
+        { nimi: "Soundcheck 45 → 75 min", tarkenne: "Riderin päivitys 20.3., ryhmä 3/3 · mahtui kasausikkunaan", peruste: "muutos #16 · rider v2", pyysi: "Bändin tuotantopäällikkö", hyvaksyi: "Marja Lehtinen 8.4.", summa: "0 €" },
+        { nimi: "Striimaus, 2 kameraa ja enkooderi", tarkenne: "Ylitti mandaattikaton 1 500 €, joten päätös meni eskalointiin", peruste: "muutos #17 · viesti 2.4.", pyysi: "Marja Lehtinen", hyvaksyi: "Timo Rasi 6.4.", summa: "1 450 €" },
+        { nimi: "Puhe 18:00 → 18:15", tarkenne: "Aikataulumuutos, ei vaikutusta miehitykseen", peruste: "muutos #11 · käyttöliittymä", pyysi: "Marja Lehtinen", hyvaksyi: "Marja Lehtinen 12.3.", summa: "0 €" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  html, body { margin: 0; padding: 0; }
+  a { color: #2f4f3f; text-decoration: none; }
+  a:hover { color: #191713; text-decoration: underline; }
+</style>
+</helmet>
+<div style="container-type: inline-size; background: #f7f4ef; color: #191713; font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, system-ui, sans-serif; font-size: 16px; line-height: 1.5; min-height: 100%; text-wrap: pretty;">
+  <div style="max-width: 720px; margin: 0 auto; padding: clamp(24px, 5cqw, 64px) clamp(18px, 4cqw, 40px) 80px; display: flex; flex-direction: column; gap: clamp(36px, 5cqw, 60px);">
+
+    <header style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8a8378;">Downstage · jaettu linkki</div>
+      <h1 style="font-family: Newsreader, 'Iowan Old Style', Georgia, serif; font-weight: 500; font-size: clamp(32px, 6.4cqw, 50px); line-height: 1.05; margin: 0; letter-spacing: -0.01em;">Kevätgaala 2027</h1>
+      <div style="font-size: clamp(15px, 2cqw, 18px); color: #57514a;">Bändin esitys · keskiviikko 14.4.2027 klo 19:30 · Juhlasali</div>
+      <div style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 12px; color: #8a8378; border-top: 1px solid #e2ddd3; padding-top: 12px;">Tämä linkki on kiinni omassa esityksessänne. Näet oman soundcheckin, oman tekniikan ja omat toimitettavat.</div>
+    </header>
+
+    <section style="display: flex; flex-direction: column; gap: 16px;">
+      <h2 style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a8378; font-weight: 500; margin: 0;">Mitä teiltä odotetaan nyt</h2>
+
+      <sc-if value="{{ ennen }}" hint-placeholder-val="{{ true }}">
+        <article style="background: #fffdfa; border: 1px solid #d9d2c5; border-radius: 4px; box-shadow: 0 1px 0 #efe9de, 0 12px 32px -28px rgba(25, 23, 19, 0.5); overflow: hidden;">
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; padding: 12px clamp(16px, 3cqw, 28px); background: #f2ece0; border-bottom: 1px solid #e2ddd3;">
+            <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #7a6f5f;">Odottaa teitä</span>
+            <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #a4552c;">määräaika ti 31.3.</span>
+          </div>
+          <div style="padding: clamp(20px, 3.5cqw, 30px) clamp(16px, 3cqw, 28px); display: flex; flex-direction: column; gap: 18px;">
+            <h3 style="font-family: Newsreader, 'Iowan Old Style', Georgia, serif; font-weight: 500; font-size: clamp(24px, 4cqw, 32px); line-height: 1.1; margin: 0;">Päivitetty rider</h3>
+            <p style="margin: 0; font-size: clamp(15px, 2.1cqw, 17px); color: #3f3a34;">Ladatkaa voimassa oleva rider PDF:nä. Luemme siitä input-listan, monitoroinnin ja backlinen suoraan tuotantoon, joten erillistä lomaketta ei ole.</p>
+            <div style="border: 1px dashed #cfc7b8; border-radius: 3px; background: #f9f5ec; padding: clamp(18px, 3cqw, 26px); display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+              <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #7a6f5f;">Voimassa: versio 1 · 12.2.</span>
+              <button type="button" onClick="{{ lataa }}" style="font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; font-weight: 500; color: #f9f7f2; background: #24322a; border: 1px solid #24322a; border-radius: 3px; padding: 13px 22px; cursor: pointer;" style-hover="background: #17211b;">Lataa uusi versio</button>
+              <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #8a8378;">PDF · enintään 25 MB · myös skannatut liitteet kelpaavat</span>
+            </div>
+            <p style="margin: 0; font-size: 14px; color: #57514a; border-top: 1px solid #e2ddd3; padding-top: 14px;">Lataus ei ole päätös. Jos versio vaatii lisää tekniikkaa, siitä syntyy muutosehdotus, jonka tilaaja hyväksyy tai hylkää. Näette pyyntönne kustannusvaikutuksen tässä samassa näkymässä.</p>
+          </div>
+        </article>
+      </sc-if>
+
+      <sc-if value="{{ jalkeen }}" hint-placeholder-val="{{ false }}">
+        <article style="background: #fffdfa; border: 1px solid #d9d2c5; border-radius: 4px; box-shadow: 0 1px 0 #efe9de, 0 12px 32px -28px rgba(25, 23, 19, 0.5); overflow: hidden;">
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; padding: 12px clamp(16px, 3cqw, 28px); background: #eef2ec; border-bottom: 1px solid #d3ddd0;">
+            <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #3d5a48;">Vastaanotettu 20.3. klo 11.04</span>
+            <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #8a8378;">rider versio 2 · 1,8 MB</span>
+          </div>
+          <div style="padding: clamp(20px, 3.5cqw, 30px) clamp(16px, 3cqw, 28px); display: flex; flex-direction: column; gap: 18px;">
+            <h3 style="font-family: Newsreader, 'Iowan Old Style', Georgia, serif; font-weight: 500; font-size: clamp(24px, 4cqw, 32px); line-height: 1.1; margin: 0;">Rider luettu, kolme muutosta tilaajan hyväksyntään</h3>
+            <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1px; background: #e6e0d5; border: 1px solid #e2ddd3; border-radius: 3px; overflow: hidden;">
+              <li style="background: #fbf9f4; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 13px 16px; align-items: baseline;">
+                <span>Langattomia mikrofoneja 2 → 4</span>
+                <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 13px; color: #a4552c; white-space: nowrap;">+180 €</span>
+              </li>
+              <li style="background: #fbf9f4; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 13px 16px; align-items: baseline;">
+                <span>Monitorilinjoja 4 → 6</span>
+                <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 13px; color: #a4552c; white-space: nowrap;">+240 €</span>
+              </li>
+              <li style="background: #fbf9f4; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 13px 16px; align-items: baseline;">
+                <span>Soundcheck 45 → 75 min</span>
+                <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 13px; white-space: nowrap;">aikataulu +30 min</span>
+              </li>
+            </ul>
+            <div style="border: 1px solid #e6dfd1; background: #f6efe4; border-radius: 3px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #7a6f5f;">Yhteensä +420 € · odottaa tilaajan hyväksyntää</span>
+              <span style="font-size: 15px;">Pyyntönne kustannusvaikutus näkyy teille, koska se on teidän pyyntönne. Tuotannon muut summat eivät näy tässä näkymässä.</span>
+            </div>
+            <p style="margin: 0; font-size: 14px; color: #57514a; border-top: 1px solid #e2ddd3; padding-top: 14px;">Yksi liite, <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 13px;">backline_skannattu.pdf</span>, on tuottajalla luettavana käsin. Ilmoitamme jos siitä tarvitaan tarkennus.</p>
+          </div>
+        </article>
+      </sc-if>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 16px;">
+      <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px;">
+        <h2 style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a8378; font-weight: 500; margin: 0;">Oma päivä · ke 14.4.</h2>
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #8a8378;">{{ aikatauluHuomio }}</span>
+      </div>
+      <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column;">
+        <sc-for list="{{ aikataulu }}" as="r" hint-placeholder-count="5">
+          <li style="display: grid; grid-template-columns: 68px 1fr; gap: 16px; align-items: baseline; padding: 15px 0; border-bottom: 1px solid #e6e0d5;">
+            <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: clamp(15px, 2.1cqw, 17px);">{{ r.klo }}</span>
+            <span>
+              <span style="font-size: clamp(16px, 2.3cqw, 19px);">{{ r.mita }}</span>
+              <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 12px; color: #8a8378;"> {{ r.meta }}</span>
+            </span>
+          </li>
+        </sc-for>
+      </ul>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 16px;">
+      <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px;">
+        <h2 style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a8378; font-weight: 500; margin: 0;">Tekniikka esitykseenne</h2>
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #8a8378;">{{ tekniikkaHuomio }}</span>
+      </div>
+      <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1px; background: #e6e0d5; border: 1px solid #e2ddd3; border-radius: 3px; overflow: hidden;">
+        <sc-for list="{{ tekniikka }}" as="t" hint-placeholder-count="6">
+          <li style="background: #fffdfa; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 14px clamp(14px, 2.5cqw, 22px); align-items: baseline;">
+            <span style="font-size: 16px;">{{ t.kuvaus }}</span>
+            <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 13px; white-space: nowrap;">{{ t.maara }}</span>
+            <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #8a8378;">{{ t.tila }}</span>
+          </li>
+        </sc-for>
+      </ul>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 16px;">
+      <h2 style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a8378; font-weight: 500; margin: 0;">Omat toimitettavat</h2>
+      <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1px; background: #e6e0d5; border: 1px solid #e2ddd3; border-radius: 3px; overflow: hidden;">
+        <li style="background: #fffdfa; padding: 15px clamp(14px, 2.5cqw, 22px); display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; align-items: baseline;">
+          <span style="font-size: 17px; font-weight: 500;">Rider</span>
+          <span>
+            <sc-if value="{{ jalkeen }}" hint-placeholder-val="{{ false }}">
+              <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 12px; white-space: nowrap; color: #3d5a48;">versio 2 · 20.3.</span>
+            </sc-if>
+            <sc-if value="{{ ennen }}" hint-placeholder-val="{{ true }}">
+              <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 12px; white-space: nowrap; color: #a4552c;">odottaa teitä</span>
+            </sc-if>
+          </span>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #8a8378;">PDF · määräaika 31.3.</span>
+        </li>
+        <li style="background: #fffdfa; padding: 15px clamp(14px, 2.5cqw, 22px); display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; align-items: baseline;">
+          <span style="font-size: 17px; font-weight: 500;">Biisilista ja ajoitukset</span>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 12px; color: #a4552c; white-space: nowrap;">odottaa</span>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #8a8378;">PDF tai teksti · määräaika 7.4.</span>
+        </li>
+        <li style="background: #fbf9f4; padding: 15px clamp(14px, 2.5cqw, 22px); display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; align-items: baseline;">
+          <span style="font-size: 17px;">Lavakartta esitykselle</span>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 12px; color: #3d5a48; white-space: nowrap;">saapunut 12.2.</span>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #8a8378;">riderin liitteenä · 6 merkintää</span>
+        </li>
+      </ul>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 16px;">
+      <h2 style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a8378; font-weight: 500; margin: 0;">Yhteyshenkilö</h2>
+      <div style="background: #fffdfa; border: 1px solid #e2ddd3; border-radius: 3px; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px; max-width: 320px;">
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a8378;">Tuottaja</span>
+        <span style="font-size: 17px; font-weight: 500;">Anna Kivistö</span>
+        <span style="font-size: 14px; color: #57514a;">Downstage-tuotanto</span>
+        <a href="tel:+358401234567" style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 13px;">040 123 4567</a>
+      </div>
+    </section>
+
+    <footer style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #8a8378; border-top: 1px solid #e2ddd3; padding-top: 16px; display: flex; flex-direction: column; gap: 6px;">
+      <span>Näette tästä linkistä oman esityksenne tiedot. Tuotannon muut osat eivät kuulu tähän näkymään.</span>
+      <span>Päivitetty 20.3. klo 11.04 · linkki vanhenee 14.6.2027</span>
+    </footer>
+  </div>
+</div>
+
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#f2ece0"></rect><rect x="30" y="30" width="40" height="40" rx="4" fill="#24322a"></rect><rect x="38" y="44" width="24" height="4" fill="#f2ece0"></rect><rect x="38" y="52" width="16" height="4" fill="#f2ece0"></rect></svg></template></x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 2000}, &quot;tila&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;ennen&quot;, &quot;jalkeen&quot;], &quot;default&quot;: &quot;ennen&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Vaihe&quot;}}">
+class Component extends DCLogic {
+  state = { ladattu: null };
+
+  renderVals() {
+    const jalkeen = (this.state.ladattu !== null ? this.state.ladattu : this.props.tila === "jalkeen");
+    return {
+      ennen: !jalkeen,
+      jalkeen: jalkeen,
+      riderTila: jalkeen ? "versio 2 · 20.3." : "odottaa teitä",
+      riderVari: jalkeen ? "#3d5a48" : "#a4552c",
+      aikatauluHuomio: jalkeen ? "soundcheck päivittyy, jos tilaaja hyväksyy riderin" : "vain oman esityksenne kohdat",
+      aikataulu: [
+        { klo: "13:00", mita: "Lava vapaa teille, backline sisään", meta: "" },
+        { klo: "15:00", mita: "Soundcheck", meta: jalkeen ? "45 min · rider v2 pyytää 75 min" : "45 min" },
+        { klo: "19:15", mita: "Vaihto lavalle", meta: "15 min" },
+        { klo: "19:30", mita: "Esitys", meta: "60 min" },
+        { klo: "20:35", mita: "Backline ulos", meta: "" }
+      ],
+      tekniikkaHuomio: jalkeen ? "riderin v2 rivit odottavat vahvistusta" : "riderin v1 mukaan",
+      tekniikka: [
+        { kuvaus: "Langattomat käsimikrofonit", maara: jalkeen ? "4 kpl" : "2 kpl", tila: jalkeen ? "ehdotettu · rider v2" : "vahvistettu" },
+        { kuvaus: "Monitorilinjat", maara: jalkeen ? "6 kpl" : "4 kpl", tila: jalkeen ? "ehdotettu · rider v2" : "vahvistettu" },
+        { kuvaus: "Monitorit lavalla, wedge", maara: "4 kpl", tila: "vahvistettu" },
+        { kuvaus: "IEM-syöttö FOH:sta", maara: "2 kpl", tila: "vahvistettu" },
+        { kuvaus: "Backline, rumpukoroke 2 × 2 m", maara: "1", tila: "vahvistettu" },
+        { kuvaus: "Lavavirta 2 × 16 A", maara: "1", tila: "vahvistettu" }
+      ],
+      lataa: () => this.setState({ ladattu: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  html, body { margin: 0; padding: 0; }
+  a { color: #2f4f3f; text-decoration: none; }
+  a:hover { color: #191713; text-decoration: underline; }
+</style>
+</helmet>
+<div style="display: grid; grid-template-columns: 1fr 1fr; min-height: 100%; font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, system-ui, sans-serif;">
+
+  <div style="background: #f7f4ef; color: #191713; padding: 32px 36px 40px; box-sizing: border-box; display: flex; flex-direction: column; gap: 26px; font-size: 16px; line-height: 1.5;">
+    <header style="display: flex; flex-direction: column; gap: 6px; border-bottom: 1px solid #e2ddd3; padding-bottom: 14px;">
+      <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8a8378;">Asiakkaan renderöinti · Marja Lehtinen</span>
+      <h2 style="font-family: Newsreader, 'Iowan Old Style', Georgia, serif; font-weight: 500; font-size: 28px; line-height: 1.1; margin: 0;">Hyväksyit riderin päivityksen</h2>
+      <span style="font-size: 14px; color: #57514a;">8.4. klo 09.41 · +420 € · aikataulu siirtyi</span>
+    </header>
+
+    <section style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px;">
+        <h3 style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a8378; font-weight: 500; margin: 0;">Päivän kulku · ke 14.4.</h3>
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #a4552c;">soundcheck siirtyi 30 min aiemmaksi</span>
+      </div>
+      <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column;">
+        <sc-for list="{{ asiakasAikataulu }}" as="r" hint-placeholder-count="6">
+          <li style="display: grid; grid-template-columns: 62px 1fr; gap: 14px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid #e6e0d5;">
+            <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 16px;">{{ r.klo }}</span>
+            <span>
+              <span style="font-size: 17px;">{{ r.mita }}</span>
+              <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 12px; color: #8a8378;"> {{ r.meta }}</span>
+            </span>
+          </li>
+        </sc-for>
+      </ul>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 12px;">
+      <h3 style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a8378; font-weight: 500; margin: 0;">Muutosloki · hyväksytyt</h3>
+      <article style="background: #fbf9f4; border: 1px solid #d3ddd0; border-radius: 3px; overflow: hidden;">
+        <div style="display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: baseline; padding: 14px 18px; background: #eef2ec; border-bottom: 1px solid #d3ddd0;">
+          <span style="font-size: 17px; font-weight: 500;">Riderin päivitys 20.3. · 3 muutosta</span>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 15px; white-space: nowrap;">+420 €</span>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #3d5a48;">hyväksyi Marja Lehtinen 8.4. klo 09.41 · lopullinen</span>
+        </div>
+        <ul style="list-style: none; margin: 0; padding: 0;">
+          <sc-for list="{{ lokiRivit }}" as="r" hint-placeholder-count="3">
+            <li style="display: grid; grid-template-columns: 1fr auto; gap: 2px 16px; align-items: baseline; padding: 11px 18px; border-bottom: 1px solid #efe9de;">
+              <span style="font-size: 15px;">{{ r.kuvaus }}</span>
+              <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 13px; white-space: nowrap;">{{ r.vaikutus }}</span>
+            </li>
+          </sc-for>
+        </ul>
+        <div style="padding: 12px 18px; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #8a8378;">rivi on lopullinen · lasku kirjoitetaan tästä</div>
+      </article>
+    </section>
+  </div>
+
+  <div style="background: #14161a; color: #e8e6e2; padding: 22px 24px 30px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px; font-size: 13px; line-height: 1.45;">
+    <header style="display: flex; flex-direction: column; gap: 5px; border-bottom: 1px solid #2b3038; padding-bottom: 12px;">
+      <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #6d7480;">Tuottajan renderöinti · sama tapahtuma</span>
+      <span style="font-size: 17px; font-weight: 600;">Hyväksyntä 8.4. 09.41 · 2 tarvetta vahvistui, 1 slot venyi</span>
+      <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #9aa0aa;">hyväksyntäjono 4 → 3 · laskenta ajettu uudelleen</span>
+    </header>
+
+    <section>
+      <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 8px;">
+        <h3 style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #9aa0aa; font-weight: 500; margin: 0;">Aikataulu · muuttuneet rivit</h3>
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #6d7480;">kova riippuvuus siirsi kaksi riviä</span>
+      </div>
+      <table style="width: 100%; border-collapse: collapse; font-size: 12.5px;">
+        <thead>
+          <tr style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6d7480; text-align: left;">
+            <th style="font-weight: 500; padding: 5px 8px 5px 0; border-bottom: 1px solid #2b3038;">Ennen</th>
+            <th style="font-weight: 500; padding: 5px 8px; border-bottom: 1px solid #2b3038;">Jälkeen</th>
+            <th style="font-weight: 500; padding: 5px 8px; border-bottom: 1px solid #2b3038;">Mitä</th>
+            <th style="font-weight: 500; padding: 5px 8px; border-bottom: 1px solid #2b3038;">Asiakkaalle</th>
+            <th style="font-weight: 500; padding: 5px 0 5px 8px; border-bottom: 1px solid #2b3038;">Syy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <sc-for list="{{ tuottajaAikataulu }}" as="r" hint-placeholder-count="4">
+            <tr style="border-bottom: 1px solid #21252c;">
+              <td style="padding: 8px 8px 8px 0; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; color: #6d7480; text-decoration: line-through; white-space: nowrap;">{{ r.ennen }}</td>
+              <td style="padding: 8px; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; color: #7fc2a3; white-space: nowrap;">{{ r.jalkeen }}</td>
+              <td style="padding: 8px;">{{ r.mita }}</td>
+              <td style="padding: 8px; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #9aa0aa;">{{ r.nakyvyys }}</td>
+              <td style="padding: 8px 0 8px 8px; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #6d7480;">{{ r.syy }}</td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 8px;">
+        <h3 style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #9aa0aa; font-weight: 500; margin: 0;">Tarvelista · ääni</h3>
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #7fc2a3;">2 ehdotettua → vahvistettu</span>
+      </div>
+      <table style="width: 100%; border-collapse: collapse; font-size: 12.5px;">
+        <tbody>
+          <sc-for list="{{ tarpeet }}" as="t" hint-placeholder-count="4">
+            <tr style="border-bottom: 1px solid #21252c;">
+              <td style="padding: 8px 8px 8px 0;">{{ t.kuvaus }}</td>
+              <td style="padding: 8px; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; color: #6d7480; white-space: nowrap;">{{ t.ennen }}</td>
+              <td style="padding: 8px; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; color: #e8e6e2; white-space: nowrap;">{{ t.jalkeen }}</td>
+              <td style="padding: 8px 0 8px 8px; text-align: right; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: #7fc2a3; white-space: nowrap;">{{ t.tila }}</td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </section>
+
+    <section style="border-top: 1px solid #2b3038; padding-top: 12px; display: flex; flex-wrap: wrap; gap: 10px 28px; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #9aa0aa;">
+      <span>miehitys 14 h → 14 h + 4 h monitoriteknikko</span>
+      <span>huippukulutus 41,2 A → 41,9 A</span>
+      <span>kuormalista päivitetty · 2 langatonta, 2 wedge</span>
+      <span style="color: #6d7480;">laskenta on koodia, ei mallia</span>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 820}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      asiakasAikataulu: [
+        { klo: "08:00", mita: "Kasaus alkaa", meta: "" },
+        { klo: "14:30", mita: "Bändin soundcheck", meta: "75 min · siirtyi 30 min aiemmaksi" },
+        { klo: "16:30", mita: "Puhujan läpimeno", meta: "" },
+        { klo: "17:30", mita: "Ovet", meta: "" },
+        { klo: "18:15", mita: "Toimitusjohtajan puhe", meta: "15 min" },
+        { klo: "19:30", mita: "Bändi", meta: "60 min" }
+      ],
+      lokiRivit: [
+        { kuvaus: "Langattomia mikrofoneja 2 → 4", vaikutus: "+180 €" },
+        { kuvaus: "Monitorilinjoja 4 → 6", vaikutus: "+240 €" },
+        { kuvaus: "Soundcheck 45 → 75 min", vaikutus: "aikataulu +30 min" }
+      ],
+      tuottajaAikataulu: [
+        { ennen: "15:00 · 45 min", jalkeen: "14:30 · 75 min", mita: "Bändin soundcheck", nakyvyys: "näkyy", syy: "rider v2 · hyväksytty" },
+        { ennen: "13:00 · 60 min", jalkeen: "12:45 · 60 min", mita: "Äänen soundcheck, järjestelmä", nakyvyys: "piilotettu", syy: "kova riippuvuus" },
+        { ennen: "12:30 · 30 min", jalkeen: "12:15 · 30 min", mita: "Kasaus valmis, tarkistus", nakyvyys: "piilotettu", syy: "kova riippuvuus" },
+        { ennen: "—", jalkeen: "14:15 · 4 h", mita: "Monitoriteknikon vuoro", nakyvyys: "piilotettu", syy: "seuraa monitorilinjoista" }
+      ],
+      tarpeet: [
+        { kuvaus: "Langattomat käsimikrofonit", ennen: "2 kpl · ehdotettu", jalkeen: "4 kpl", tila: "vahvistettu" },
+        { kuvaus: "Monitorilinjat", ennen: "4 kpl · ehdotettu", jalkeen: "6 kpl", tila: "vahvistettu" },
+        { kuvaus: "Monitoriteknikko soundcheckiin", ennen: "— · ehdotettu", jalkeen: "1 × 4 h", tila: "vahvistettu" },
+        { kuvaus: "FOH-miksauspaikka, digipöytä 32ch", ennen: "1", jalkeen: "1", tila: "ennallaan" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

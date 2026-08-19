@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;500&display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #0f1012; }
+  a { color: #8fb8a8; text-decoration: none; }
+  a:hover { color: #e8e6e2; text-decoration: underline; }
+</style>
+</helmet>
+<div style="background: #0f1012; color: #e8e6e2; font-family: 'IBM Plex Sans', system-ui, sans-serif; min-height: 100vh; padding: 24px 28px 56px; box-sizing: border-box;">
+
+  <header style="display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: flex-end; justify-content: space-between; border-bottom: 1px solid #24272d; padding-bottom: 16px; margin-bottom: 24px;">
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #6d7480;">Downstage · mockup 01</span>
+      <h1 style="font-family: Newsreader, serif; font-weight: 500; font-size: 30px; line-height: 1.1; margin: 0;">Sama data renderöityy kahdesti</h1>
+      <span style="font-size: 13px; color: #9aa0aa;">Kevätgaala 2027 · sama tuotanto, sama totuus, kaksi käyttöliittymää.</span>
+    </div>
+    <nav style="display: flex; gap: 6px; flex-wrap: wrap;">
+      <sc-for list="{{ tilat }}" as="t" hint-placeholder-count="4">
+        <button type="button" onClick="{{ t.valitse }}" style="{{ t.style }}">{{ t.label }}</button>
+      </sc-for>
+    </nav>
+  </header>
+
+  <sc-if value="{{ onRinnakkain }}" hint-placeholder-val="{{ true }}">
+    <div style="display: flex; flex-direction: column; gap: 32px;">
+      <div style="display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap;">
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #9aa0aa;">
+            <span>Asiakas · yksi jaettu linkki</span>
+            <span style="color: #6d7480;">1440</span>
+          </div>
+          <div style="width: 605px; height: 1080px; overflow: hidden; border: 1px solid #2b3038; border-radius: 3px; background: #f7f4ef;">
+            <div style="width: 1440px; transform: scale(0.42); transform-origin: top left;">
+              <dc-import name="Asiakasnakyma" hint-size="1440px,2600px"></dc-import>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #9aa0aa;">
+            <span>Sama sivu puhelimella</span>
+            <span style="color: #6d7480;">390</span>
+          </div>
+          <div style="width: 253px; height: 1080px; overflow: hidden; border: 1px solid #2b3038; border-radius: 14px; background: #f7f4ef;">
+            <div style="width: 390px; transform: scale(0.65); transform-origin: top left;">
+              <dc-import name="Asiakasnakyma" hint-size="390px,2600px"></dc-import>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #9aa0aa;">
+            <span>Tuottaja · sama tuotanto sisältä</span>
+            <span style="color: #6d7480;">1440</span>
+          </div>
+          <div style="width: 605px; height: 1080px; overflow: hidden; border: 1px solid #2b3038; border-radius: 3px; background: #14161a;">
+            <div style="width: 1440px; transform: scale(0.42); transform-origin: top left;">
+              <dc-import name="Tuottajanakyma" hint-size="1440px,1200px"></dc-import>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: #24272d; border: 1px solid #24272d; border-radius: 3px; max-width: 1520px;">
+        <div style="background: #15171b; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #e0b57a;">Päätöskohta, jolla on oletus</span>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: #c9cdd4;">Se on rakennettu sopimusehdoksi, ei muistutukseksi: määräaika on iso ja mitattava, mutta painavin elementti on lause siitä mitä tapahtuu jos päätöstä ei tule. Ehto on aina näkyvissä ja luettavissa myös silloin kun päätös on tehty, koska sen tehtävä on olla julkinen, ei uhata. Toiminnot ovat ehdon jälkeen, eivät ennen sitä: ensin luetaan seuraus, sitten valitaan.</p>
+        </div>
+        <div style="background: #15171b; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #e0b57a;">Ehdotettu tarve lähteineen</span>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: #c9cdd4;">Tarkistaminen on tehty nopeammaksi kuin epäileminen: yksi klikkaus avaa alkuperäisen lauseen riderista samaan riviin, ilman dokumenttinäkymää. Lainaus on monospacea ja sanatarkka, sen alla diff v1 → v2 ja hintalappu. Vahvista ja Hylkää ovat lainauksen alla, ja näppäimillä V ja H, jotta rivin voi ratkaista katsomatta pois lainauksesta.</p>
+        </div>
+        <div style="background: #15171b; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #6d7480;">Kokeile</span>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: #c9cdd4;">Hyväksy riderin päivitys asiakasnäkymässä: soundcheck siirtyy 14:30:een molemmissa näkymissä ja muutos siirtyy Odottaa sinua ‑ryhmästä hyväksyttyihin. Vahvista tuottajan näkymässä molemmat äänirivit, niin aikataulun riippuvuusteksti vaihtuu ehdotuksesta tosiasiaksi.</p>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ onAsiakas }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-start;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #9aa0aa;">Asiakasnäkymä · 1440</span>
+      <div style="width: 1440px; max-width: 100%; border: 1px solid #2b3038; border-radius: 3px; overflow: hidden; background: #f7f4ef;">
+        <dc-import name="Asiakasnakyma" hint-size="1440px,2600px"></dc-import>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ onPuhelin }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-start;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #9aa0aa;">Asiakasnäkymä · 390 · sama sivu, sama sisältö</span>
+      <div style="width: 390px; border: 1px solid #2b3038; border-radius: 18px; overflow: hidden; background: #f7f4ef;">
+        <dc-import name="Asiakasnakyma" hint-size="390px,2600px"></dc-import>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ onTuottaja }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-start;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #9aa0aa;">Tuottajan näkymä · 1440</span>
+      <div style="width: 1440px; max-width: 100%; border: 1px solid #2b3038; border-radius: 3px; overflow: hidden; background: #14161a;">
+        <dc-import name="Tuottajanakyma" hint-size="1440px,1200px"></dc-import>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;nakyma&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;rinnakkain&quot;, &quot;asiakas&quot;, &quot;puhelin&quot;, &quot;tuottaja&quot;], &quot;default&quot;: &quot;rinnakkain&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Näkymä&quot;}}">
+class Component extends DCLogic {
+  state = { nakyma: null };
+
+  renderVals() {
+    const nyt = this.state.nakyma || this.props.nakyma || "rinnakkain";
+    const nappi = aktiivinen =>
+      "font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; padding: 8px 13px; border-radius: 2px; cursor: pointer; border: 1px solid " +
+      (aktiivinen ? "#7fc2a3" : "#343a44") + "; background: " + (aktiivinen ? "#1a2620" : "#181b20") + "; color: " +
+      (aktiivinen ? "#a2d6bd" : "#c9cdd4") + ";";
+    const tilat = [
+      ["rinnakkain", "Rinnakkain"],
+      ["asiakas", "Asiakas 1440"],
+      ["puhelin", "Asiakas 390"],
+      ["tuottaja", "Tuottaja 1440"]
+    ].map(([id, label]) => ({
+      label,
+      style: nappi(nyt === id),
+      valitse: () => this.setState({ nakyma: id })
+    }));
+    return {
+      tilat,
+      onRinnakkain: nyt === "rinnakkain",
+      onAsiakas: nyt === "asiakas",
+      onPuhelin: nyt === "puhelin",
+      onTuottaja: nyt === "tuottaja"
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  html, body { margin: 0; padding: 0; }
+  a { color: #2f4f3f; text-decoration: none; }
+  a:hover { color: #191713; text-decoration: underline; }
+</style>
+</helmet>
+<div style="background: #f7f4ef; color: #191713; font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, system-ui, sans-serif; font-size: 16px; line-height: 1.5; min-height: 100%; padding: 40px 44px 48px; box-sizing: border-box; text-wrap: pretty;">
+  <div style="max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px;">
+
+    <header style="display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: flex-end; justify-content: space-between; border-bottom: 1px solid #e2ddd3; padding-bottom: 16px;">
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8a8378;">Downstage · jaettu linkki · Marja Lehtinen</span>
+        <h1 style="font-family: Newsreader, 'Iowan Old Style', Georgia, serif; font-weight: 500; font-size: 34px; line-height: 1.1; margin: 0;">Muutokset</h1>
+      </div>
+      <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 12px; color: #8a8378;">mandaattikattosi 1 500 € · hyväksytyt tähän mennessä 0 €</span>
+    </header>
+
+    <div style="display: flex; align-items: baseline; gap: 10px;">
+      <h2 style="font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; font-weight: 600; margin: 0;">Odottaa sinua</h2>
+      <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 12px; color: #a4552c;">2</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 22px; align-items: start;">
+
+      <article style="background: #fffdfa; border: 1px solid #d9d2c5; border-radius: 4px; box-shadow: 0 1px 0 #efe9de, 0 12px 32px -28px rgba(25, 23, 19, 0.5); overflow: hidden;">
+        <div style="display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; align-items: baseline; padding: 18px 24px; border-bottom: 1px solid #e2ddd3;">
+          <span style="font-size: 20px; font-weight: 500;">Riderin päivitys 20.3.</span>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 16px; color: #a4552c; white-space: nowrap;">+420 €</span>
+          <span style="font-size: 14px; color: #57514a;">3 muutosta · pyytäjä: bändin tuotantopäällikkö · rider v2</span>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #8a8378; white-space: nowrap;">yksi päätös</span>
+        </div>
+        <ul style="list-style: none; margin: 0; padding: 0;">
+          <sc-for list="{{ rivit }}" as="r" hint-placeholder-count="3">
+            <li style="display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: baseline; padding: 14px 24px; border-bottom: 1px solid #efe9de;">
+              <span style="font-size: 16px;">{{ r.kuvaus }}</span>
+              <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 14px; white-space: nowrap;">{{ r.vaikutus }}</span>
+              <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #8a8378;">{{ r.lahde }}</span>
+            </li>
+          </sc-for>
+        </ul>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; padding: 18px 24px; background: #f9f5ec;">
+          <span style="font-size: 13px; color: #57514a; max-width: 300px;">Nämä kolme syntyivät samasta latauksesta, joten ne hyväksytään tai hylätään yhdessä. Summa on mandaattikattosi alapuolella.</span>
+          <span style="display: flex; gap: 10px;">
+            <span style="font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, sans-serif; font-size: 14px; color: #191713; background: transparent; border: 1px solid #cfc7b8; border-radius: 3px; padding: 11px 16px;">Hylkää</span>
+            <span style="font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, sans-serif; font-size: 14px; font-weight: 500; color: #f9f7f2; background: #24322a; border: 1px solid #24322a; border-radius: 3px; padding: 11px 18px;">Hyväksy kaikki kolme, +420 €</span>
+          </span>
+        </div>
+      </article>
+
+      <article style="background: #fffdfa; border: 1px solid #e2ddd3; border-radius: 4px; padding: 18px 24px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: baseline;">
+          <span style="font-size: 20px; font-weight: 500;">Striimaus lisätään</span>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 16px; color: #a4552c; white-space: nowrap;">+1 450 €</span>
+          <span style="font-size: 14px; color: #57514a;">Pyytäjä: Marja Lehtinen (sinä) · 2.4.</span>
+        </div>
+        <div style="border: 1px solid #e6dfd1; background: #f6efe4; border-radius: 3px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;">
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #7a6f5f;">Eskaloitu 2.4. · odottaa Timo Rasia</span>
+          <span style="font-size: 15px;">Summa ylittää mandaattikattosi 1 500 €, joten päätös menee markkinointijohtajalle. Sinun ei tarvitse tehdä tälle mitään.</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px; border-top: 1px solid #e2ddd3; padding-top: 14px; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #8a8378;">
+          <span>muistutus Timolle lähti 5.4.</span>
+          <span>ei painikkeita: päätös ei ole sinun</span>
+        </div>
+      </article>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 4px;">
+      <div style="display: flex; align-items: baseline; gap: 10px;">
+        <h2 style="font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, sans-serif; font-size: 15px; font-weight: 600; margin: 0;">Hyväksytyt</h2>
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 12px; color: #8a8378;">1</span>
+      </div>
+      <ul style="list-style: none; margin: 0; padding: 0; background: #fbf9f4; border: 1px solid #e2ddd3; border-radius: 3px; overflow: hidden;">
+        <li style="display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: baseline; padding: 14px 22px;">
+          <span style="font-size: 16px;">Puhe 18:00 → 18:15</span>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 14px; white-space: nowrap;">aikataulu +15 min</span>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #8a8378;">Marja Lehtinen (sinä) · 12.3.</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 720}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      rivit: [
+        { kuvaus: "Langattomia mikrofoneja 2 → 4", vaikutus: "+180 €", lahde: "rider v2 · input list" },
+        { kuvaus: "Monitorilinjoja 4 → 6", vaikutus: "+240 €", lahde: "rider v2 · monitoring" },
+        { kuvaus: "Soundcheck 45 → 75 min", vaikutus: "aikataulu +30 min", lahde: "rider v2 · schedule" }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

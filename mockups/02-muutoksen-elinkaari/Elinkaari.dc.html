@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;500&display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #0f1012; }
+  a { color: #8fb8a8; text-decoration: none; }
+  a:hover { color: #e8e6e2; text-decoration: underline; }
+</style>
+</helmet>
+<div style="background: #0f1012; color: #e8e6e2; font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, system-ui, sans-serif; min-height: 100vh; padding: 24px 28px 64px; box-sizing: border-box;">
+
+  <header style="display: flex; flex-wrap: wrap; gap: 16px 28px; align-items: flex-end; justify-content: space-between; border-bottom: 1px solid #24272d; padding-bottom: 16px; margin-bottom: 24px;">
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #6d7480;">Downstage · mockup 02</span>
+      <h1 style="font-family: Newsreader, 'Iowan Old Style', Georgia, serif; font-weight: 500; font-size: 30px; line-height: 1.1; margin: 0;">Yhden muutoksen koko elinkaari</h1>
+      <span style="font-size: 13px; color: #9aa0aa;">Rider v2, ladattu 20.3. → hyväksytty 8.4. → laskulla 15.4. Kolme osapuolta, sama data.</span>
+    </div>
+    <nav style="display: flex; gap: 6px; flex-wrap: wrap; max-width: 620px; justify-content: flex-end;">
+      <sc-for list="{{ napit }}" as="n" hint-placeholder-count="7">
+        <button type="button" onClick="{{ n.valitse }}" style="{{ n.style }}">{{ n.label }}</button>
+      </sc-for>
+    </nav>
+  </header>
+
+  <sc-if value="{{ onKoonti }}" hint-placeholder-val="{{ true }}">
+    <div style="display: flex; flex-direction: column; gap: 26px;">
+      <div style="display: flex; gap: 18px; align-items: flex-start; overflow-x: auto; padding-bottom: 10px;">
+
+        <div style="display: flex; flex-direction: column; gap: 8px; flex: 0 0 auto;">
+          <div style="display: flex; gap: 8px; align-items: baseline; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;">
+            <span style="color: #e0b57a;">1</span><span style="color: #9aa0aa;">Lataus · vastapuoli</span>
+          </div>
+          <div style="width: 432px; height: 560px; overflow: hidden; border: 1px solid #2b3038; border-radius: 3px; background: #f7f4ef;">
+            <div style="width: 1440px; transform: scale(0.3); transform-origin: top left;">
+              <dc-import name="Vastapuolinakyma" tila="ennen" hint-size="1440px,2000px"></dc-import>
+            </div>
+          </div>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; color: #6d7480;">sama asiakasrenderöinti, rajattuna omaan esitykseen</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px; flex: 0 0 auto;">
+          <div style="display: flex; gap: 8px; align-items: baseline; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;">
+            <span style="color: #e0b57a;">2</span><span style="color: #9aa0aa;">Parsinta · tuottaja</span>
+          </div>
+          <div style="width: 432px; height: 560px; overflow: hidden; border: 1px solid #2b3038; border-radius: 3px; background: #14161a;">
+            <div style="width: 1440px; transform: scale(0.3); transform-origin: top left;">
+              <dc-import name="Vaihe2_Parsinta" tila="hinnoittelematon" hint-size="1440px,760px"></dc-import>
+            </div>
+          </div>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; color: #6d7480;">mallin arvio erillään tuottajan hinnasta</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px; flex: 0 0 auto;">
+          <div style="display: flex; gap: 8px; align-items: baseline; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;">
+            <span style="color: #e0b57a;">3</span><span style="color: #9aa0aa;">Parsimatta · tuottaja</span>
+          </div>
+          <div style="width: 432px; height: 560px; overflow: hidden; border: 1px solid #2b3038; border-radius: 3px; background: #14161a;">
+            <div style="width: 1440px; transform: scale(0.3); transform-origin: top left;">
+              <dc-import name="Vaihe3_Parsimatta" hint-size="1440px,620px"></dc-import>
+            </div>
+          </div>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; color: #6d7480;">epäonnistuminen näkyy, malli ei arvaa</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px; flex: 0 0 auto;">
+          <div style="display: flex; gap: 8px; align-items: baseline; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;">
+            <span style="color: #e0b57a;">4</span><span style="color: #9aa0aa;">Hyväksyntä · asiakas</span>
+          </div>
+          <div style="width: 432px; height: 560px; overflow: hidden; border: 1px solid #2b3038; border-radius: 3px; background: #f7f4ef;">
+            <div style="width: 1440px; transform: scale(0.3); transform-origin: top left;">
+              <dc-import name="Vaihe4_Hyvaksynta" hint-size="1440px,720px"></dc-import>
+            </div>
+          </div>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; color: #6d7480;">kolme riviä, yksi päätös · katto ja eskalointi</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px; flex: 0 0 auto;">
+          <div style="display: flex; gap: 8px; align-items: baseline; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;">
+            <span style="color: #e0b57a;">5</span><span style="color: #9aa0aa;">Seuraukset · molemmat</span>
+          </div>
+          <div style="width: 432px; height: 560px; overflow: hidden; border: 1px solid #2b3038; border-radius: 3px; background: #14161a;">
+            <div style="width: 1440px; transform: scale(0.3); transform-origin: top left;">
+              <dc-import name="Vaihe5_Seuraukset" hint-size="1440px,820px"></dc-import>
+            </div>
+          </div>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; color: #6d7480;">sama seuraus kahdella kielellä</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px; flex: 0 0 auto;">
+          <div style="display: flex; gap: 8px; align-items: baseline; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;">
+            <span style="color: #e0b57a;">6</span><span style="color: #9aa0aa;">Lasku · asiakas</span>
+          </div>
+          <div style="width: 432px; height: 560px; overflow: hidden; border: 1px solid #2b3038; border-radius: 3px; background: #f7f4ef;">
+            <div style="width: 1440px; transform: scale(0.3); transform-origin: top left;">
+              <dc-import name="Vaihe6_Lasku" hint-size="1440px,940px"></dc-import>
+            </div>
+          </div>
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; color: #6d7480;">jokainen rivi johtuu lokista</span>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1px; background: #24272d; border: 1px solid #24272d; border-radius: 3px; max-width: 1400px;">
+        <div style="background: #15171b; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #e0b57a;">Mallin arvio vs. tuottajan hinta</span>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: #c9cdd4;">Ne ovat kaksi eri saraketta, eivät kaksi tilaa samassa kentässä. Arvio on katkoviivalla, harmaana ja etumerkillä ≈, ja sen alla lukee «malli, ei sitova». Tuottajan hinta on umpiviivalla, isompi ja hyväksyntävärillä, ja siihen tulee hinnoittelijan nimi ja kellonaika. Ennen hinnoittelua siinä ei ole lukua vaan toiminto, joten valmista hintaa ei ole olemassa. Rivi ei näy tilaajalle eikä vaikuta laskentaan ennen kuin sarake on täytetty. Vaiheessa 2 arvio 200 € on tarkoituksella väärä: tuottaja korjasi 240 €:oon, koska monitoriteknikon vuoro puuttui arviosta.</p>
+        </div>
+        <div style="background: #15171b; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #e0b57a;">Mitä vastapuolelta jätettiin pois</span>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: #c9cdd4;">Ei kokonaisbudjettia, ei tuotannon muita summia, ei muita esiintyjiä, ei tuotannon päätöskohtia, ei tilaajan yhteystietoja eikä muutoslokia kokonaisuutena. Jäljelle jää oma soundcheck, oma tekniikka, omat toimitettavat ja yksi yhteyshenkilö. Ainoa raha, joka näkyy, on hänen oman pyyntönsä vaikutus, koska se hillitsee pyyntöjä ilman että se paljastaa kokonaisuutta. Rajaus tulee objektipuusta: linkki on kiinni omassa esityksessä, joten mitään roolia tai oikeusmatriisia ei tarvita.</p>
+        </div>
+        <div style="background: #15171b; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #6d7480;">Elinkaari on esitystapa</span>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: #c9cdd4;">Numerot 1–6 ovat vain tässä koonnissa. Yhdessäkään ruudussa ei ole vaihekaaviota, edistymispalkkia eikä tietoa siitä, monesko vaihe on menossa. Käyttäjä näkee aina vain oman tapahtumansa nykytilan.</p>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ on1 }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <div style="display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: flex-start; justify-content: space-between; border: 1px solid #24272d; background: #15171b; border-radius: 3px; padding: 16px 18px; max-width: 1440px;">
+        <div style="display: flex; flex-direction: column; gap: 6px; max-width: 620px;">
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #e0b57a;">Vaihe 1 · bändin tuotantopäällikkö avaa oman linkkinsä</span>
+          <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: #c9cdd4;">Ei neljättä käyttöliittymää: sama asiakasrenderöinti, rajattuna omaan esitykseen. Vasemmalla tila ennen latausta, oikealla heti latauksen jälkeen. Puhelinversio on sama sivu.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #9aa0aa;">
+          <span style="color: #6d7480; letter-spacing: 0.12em; text-transform: uppercase; font-size: 10px;">Pois rajattu</span>
+          <span>kokonaisbudjetti ja tuotannon muut summat</span>
+          <span>muut esiintyjät ja koko ohjelma</span>
+          <span>tuotannon päätöskohdat</span>
+          <span>tilaajan yhteystiedot ja muutosloki</span>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa0aa;">Ennen latausta · 1440</span>
+          <div style="width: 720px; height: 900px; overflow: hidden; border: 1px solid #2b3038; border-radius: 3px; background: #f7f4ef;">
+            <div style="width: 1440px; transform: scale(0.5); transform-origin: top left;">
+              <dc-import name="Vastapuolinakyma" tila="ennen" hint-size="1440px,2000px"></dc-import>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa0aa;">Latauksen jälkeen · 1440</span>
+          <div style="width: 720px; height: 900px; overflow: hidden; border: 1px solid #2b3038; border-radius: 3px; background: #f7f4ef;">
+            <div style="width: 1440px; transform: scale(0.5); transform-origin: top left;">
+              <dc-import name="Vastapuolinakyma" tila="jalkeen" hint-size="1440px,2000px"></dc-import>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa0aa;">Puhelin · 390</span>
+          <div style="width: 390px; height: 900px; overflow: hidden; border: 1px solid #2b3038; border-radius: 18px; background: #f7f4ef;">
+            <dc-import name="Vastapuolinakyma" tila="ennen" hint-size="390px,2000px"></dc-import>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ on2 }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <div style="border: 1px solid #24272d; background: #15171b; border-radius: 3px; padding: 16px 18px; max-width: 1440px; display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #e0b57a;">Vaihe 2 · rider v2 purettu tietueiksi, diff versiota 1 vasten</span>
+        <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: #c9cdd4; max-width: 900px;">Kaksi tilaa omina ruutuinaan: ensin mallin arviot ilman hintaa, sitten tuottajan hinnoittelemat rivit. Kolme riviä lähtee tilaajalle yhtenä päätöksenä, koska ne tulivat samasta latauksesta.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa0aa;">2a · parsittu, hinnoittelematon · ei näy tilaajalle</span>
+        <div style="width: 1440px; max-width: 100%; border: 1px solid #2b3038; border-radius: 3px; overflow: hidden; background: #14161a;">
+          <dc-import name="Vaihe2_Parsinta" tila="hinnoittelematon" hint-size="1440px,760px"></dc-import>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa0aa;">2b · tuottaja hinnoitteli · lähtee tilaajalle</span>
+        <div style="width: 1440px; max-width: 100%; border: 1px solid #2b3038; border-radius: 3px; overflow: hidden; background: #14161a;">
+          <dc-import name="Vaihe2_Parsinta" tila="hinnoiteltu" hint-size="1440px,760px"></dc-import>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ on3 }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <div style="border: 1px solid #24272d; background: #15171b; border-radius: 3px; padding: 16px 18px; max-width: 1440px; display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #e0b57a;">Vaihe 3 · samassa latauksessa tuli skannattu liite</span>
+        <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: #c9cdd4; max-width: 900px;">Tila on parsimatta, ja tuottajalle syntyi tehtävä, jossa tiedosto on liitteenä. Malli ei tuottanut yhtään riviä eikä arvannut sisältöä. Käsin kirjattu rivi on kelvollinen lopputulos, väärä automaattinen ei.</p>
+      </div>
+      <div style="width: 1440px; max-width: 100%; border: 1px solid #2b3038; border-radius: 3px; overflow: hidden; background: #14161a;">
+        <dc-import name="Vaihe3_Parsimatta" hint-size="1440px,620px"></dc-import>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ on4 }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <div style="border: 1px solid #24272d; background: #15171b; border-radius: 3px; padding: 16px 18px; max-width: 1440px; display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #e0b57a;">Vaihe 4 · tilaajan hyväksyntä ja mandaattikatto</span>
+        <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: #c9cdd4; max-width: 900px;">Vasemmalla ryhmä, joka mahtuu kattoon: kolme riviä, yksi toiminto, 420 €. Oikealla sama mekanismi katon yli: striimaus 1 450 € on Timo Rasilla, ja Marjan ruudulla ei ole painikkeita, koska päätös ei ole hänen.</p>
+      </div>
+      <div style="width: 1440px; max-width: 100%; border: 1px solid #2b3038; border-radius: 3px; overflow: hidden; background: #f7f4ef;">
+        <dc-import name="Vaihe4_Hyvaksynta" hint-size="1440px,720px"></dc-import>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ on5 }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <div style="border: 1px solid #24272d; background: #15171b; border-radius: 3px; padding: 16px 18px; max-width: 1440px; display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #e0b57a;">Vaihe 5 · sama seuraus kahdella kielellä</span>
+        <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: #c9cdd4; max-width: 900px;">Hyväksyntä ei ole tilamuutos lokirivissä. Vasemmalla asiakas näkee siirtyneen soundcheckin ja lopullisen lokirivin, oikealla tuottaja näkee siirtyneet riippuvuudet, vahvistuneet tarpeet ja uudelleen ajetun laskennan.</p>
+      </div>
+      <div style="width: 1440px; max-width: 100%; border: 1px solid #2b3038; border-radius: 3px; overflow: hidden; background: #14161a;">
+        <dc-import name="Vaihe5_Seuraukset" hint-size="1440px,820px"></dc-import>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ on6 }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <div style="border: 1px solid #24272d; background: #15171b; border-radius: 3px; padding: 16px 18px; max-width: 1440px; display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #e0b57a;">Vaihe 6 · lasku on lokin tuloste</span>
+        <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: #c9cdd4; max-width: 900px;">Sama linkki tapahtuman jälkeen. Jokaisella rivillä on muutoksen numero, pyytäjä, hyväksyjä ja aikaleima, eli sama tieto joka näkyi silloin kun päätös tehtiin. Siksi rivejä ei tarvitse perustella jälkikäteen.</p>
+      </div>
+      <div style="width: 1440px; max-width: 100%; border: 1px solid #2b3038; border-radius: 3px; overflow: hidden; background: #f7f4ef;">
+        <dc-import name="Vaihe6_Lasku" hint-size="1440px,940px"></dc-import>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#14161a"></rect><rect x="30" y="30" width="40" height="40" rx="4" fill="#e0b57a"></rect><rect x="38" y="44" width="24" height="4" fill="#14161a"></rect><rect x="38" y="52" width="16" height="4" fill="#14161a"></rect></svg></template></x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;nakyma&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;koonti&quot;, &quot;v1&quot;, &quot;v2&quot;, &quot;v3&quot;, &quot;v4&quot;, &quot;v5&quot;, &quot;v6&quot;], &quot;default&quot;: &quot;koonti&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Näkymä&quot;}}">
+class Component extends DCLogic {
+  state = { nakyma: null };
+
+  renderVals() {
+    const nyt = this.state.nakyma || this.props.nakyma || "koonti";
+    const tyyli = a =>
+      "font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.06em; padding: 8px 12px; border-radius: 2px; cursor: pointer; border: 1px solid " +
+      (a ? "#7fc2a3" : "#343a44") + "; background: " + (a ? "#1a2620" : "#181b20") + "; color: " + (a ? "#a2d6bd" : "#c9cdd4") + ";";
+    const napit = [
+      ["koonti", "Koonti"],
+      ["v1", "1 Lataus"],
+      ["v2", "2 Parsinta"],
+      ["v3", "3 Parsimatta"],
+      ["v4", "4 Hyväksyntä"],
+      ["v5", "5 Seuraukset"],
+      ["v6", "6 Lasku"]
+    ].map(([id, label]) => ({ label, style: tyyli(nyt === id), valitse: () => this.setState({ nakyma: id }) }));
+    return {
+      napit,
+      onKoonti: nyt === "koonti",
+      on1: nyt === "v1",
+      on2: nyt === "v2",
+      on3: nyt === "v3",
+      on4: nyt === "v4",
+      on5: nyt === "v5",
+      on6: nyt === "v6"
+    };
+  }
+}
+</script>
+</body>
+</html>

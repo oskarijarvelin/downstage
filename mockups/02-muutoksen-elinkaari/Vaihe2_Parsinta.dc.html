@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  html, body { margin: 0; padding: 0; }
+  a { color: #8fb8a8; text-decoration: none; }
+  a:hover { color: #d6e4dd; text-decoration: underline; }
+</style>
+</helmet>
+<div style="background: #14161a; color: #e8e6e2; font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, system-ui, sans-serif; font-size: 13px; line-height: 1.45; min-height: 100%;">
+
+  <header style="display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid #2b3038; background: #1b1e24;">
+    <div style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;">
+      <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #6d7480;">Downstage</span>
+      <span style="font-size: 16px; font-weight: 600;">Kevätgaala 2027</span>
+      <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #9aa0aa;">Nordkraft Oy · ke 14.4.2027 · Juhlasali · T‑6</span>
+    </div>
+    <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #9aa0aa;">bändin tuotantopäällikkö latasi rider v2 · 20.3. klo 11.04</span>
+  </header>
+
+  <section style="padding: 16px 20px 22px; display: flex; flex-direction: column; gap: 14px;">
+    <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px;">
+      <h2 style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #9aa0aa; font-weight: 500; margin: 0;">Rider v2 · diff versiota 1 vasten · 3 riviä</h2>
+      <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #6d7480;">{{ tilaTeksti }}</span>
+    </div>
+
+    <table style="width: 100%; border-collapse: collapse; font-size: 12.5px;">
+      <thead>
+        <tr style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #6d7480; text-align: left;">
+          <th style="font-weight: 500; padding: 6px 10px 6px 0; border-bottom: 1px solid #2b3038;">Muutos</th>
+          <th style="font-weight: 500; padding: 6px 10px; border-bottom: 1px solid #2b3038;">v1 → v2</th>
+          <th style="font-weight: 500; padding: 6px 10px; border-bottom: 1px solid #2b3038;">Lähde</th>
+          <th style="font-weight: 500; padding: 6px 10px; border-bottom: 1px solid #2b3038; text-align: right;">Mallin arvio</th>
+          <th style="font-weight: 500; padding: 6px 0 6px 10px; border-bottom: 1px solid #2b3038; text-align: right;">Tuottajan hinta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <sc-for list="{{ rivit }}" as="r" hint-placeholder-count="3">
+          <tr style="border-bottom: 1px solid #21252c;">
+            <td style="padding: 10px 10px 10px 0; vertical-align: top;">
+              <span style="font-weight: 500;">{{ r.kuvaus }}</span>
+              <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #6d7480; display: block;">{{ r.kategoria }}</span>
+            </td>
+            <td style="padding: 10px; vertical-align: top; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; color: #c9cdd4; white-space: nowrap;">{{ r.diff }}</td>
+            <td style="padding: 10px; vertical-align: top; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #9aa0aa;">{{ r.lahde }}</td>
+            <td style="padding: 10px; vertical-align: top; text-align: right;">
+              <span style="display: inline-block; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 12px; color: #949aa4; border: 1px dashed #3d4450; border-radius: 2px; padding: 3px 8px; white-space: nowrap;">{{ r.arvio }}</span>
+              <span style="display: block; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: #6d7480; margin-top: 4px;">malli, ei sitova</span>
+            </td>
+            <td style="padding: 10px 0 10px 10px; vertical-align: top; text-align: right;">
+              <sc-if value="{{ hinnoittelematon }}" hint-placeholder-val="{{ true }}">
+                <span style="display: inline-block; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 12px; color: #e0b57a; border: 1px solid #4a3c26; background: #241f18; border-radius: 2px; padding: 4px 10px; white-space: nowrap;">hinnoittele</span>
+              </sc-if>
+              <sc-if value="{{ hinnoiteltu }}" hint-placeholder-val="{{ false }}">
+                <span style="display: inline-block; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 14px; font-weight: 600; color: #e8e6e2; border: 1px solid #7fc2a3; background: #1a2620; border-radius: 2px; padding: 4px 10px; white-space: nowrap;">{{ r.hinta }}</span>
+                <span style="display: block; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: #7fc2a3; margin-top: 4px;">{{ r.hinnoittelija }}</span>
+              </sc-if>
+            </td>
+          </tr>
+          <tr style="border-bottom: 1px solid #21252c;">
+            <td colspan="5" style="padding: 0 0 12px;">
+              <div style="border: 1px solid #343a44; border-left: 2px solid #7a6440; background: #191d23; border-radius: 2px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #9aa0aa;">
+                  <span>{{ r.lainausOtsikko }}</span>
+                  <span style="color: #6d7480;">parsittu 20.3. 11.04 · malli ehdottaa, ihminen sitoo</span>
+                </div>
+                <blockquote style="margin: 0; font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 12px; line-height: 1.55; color: #e8e6e2; background: #101317; border: 1px solid #262b33; border-radius: 2px; padding: 10px 12px;">{{ r.lainaus }}</blockquote>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                  <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 11px; color: #9aa0aa;">{{ r.peruste }}</span>
+                  <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; color: #6d7480; margin-left: auto;">V vahvista · H hylkää · Esc sulje</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </sc-for>
+      </tbody>
+    </table>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; border: 1px solid #343a44; background: #1a1d22; border-radius: 3px; padding: 14px 16px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa0aa;">{{ jalkiOtsikko }}</span>
+        <span style="font-size: 13px; color: #c9cdd4; max-width: 620px;">{{ jalkiTeksti }}</span>
+      </div>
+      <span style="display: flex; gap: 8px; align-items: center;">
+        <span style="font-family: 'IBM Plex Mono', Menlo, Consolas, monospace; font-size: 16px; color: #e8e6e2;">{{ summa }}</span>
+        <span style="font-family: 'IBM Plex Sans', 'Helvetica Neue', Helvetica, sans-serif; font-size: 12px; font-weight: 500; color: #0f1512; background: #7fc2a3; border-radius: 2px; padding: 8px 13px;">{{ nappi }}</span>
+      </span>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 760}, &quot;tila&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;hinnoittelematon&quot;, &quot;hinnoiteltu&quot;], &quot;default&quot;: &quot;hinnoittelematon&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Vaihe&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const hinnoiteltu = this.props.tila === "hinnoiteltu";
+    return {
+      hinnoiteltu,
+      hinnoittelematon: !hinnoiteltu,
+      tilaTeksti: hinnoiteltu ? "hinnoiteltu 20.3. 11.22 · lähtee tilaajalle yhtenä ryhmänä" : "ei näy tilaajalle ennen kuin tuottaja on hinnoitellut",
+      rivit: [
+        { kuvaus: "Langattomat käsimikrofonit", kategoria: "ääni · tarve", diff: "2 → 4 kpl", lahde: "Rider v2 · s. 2 · input list", arvio: "≈ 180 €", hinta: "180 €", hinnoittelija: "Anna Kivistö 11.22",
+          lainausOtsikko: "Lähdelainaus · rider v2 s. 2", lainaus: "4 × handheld wireless (SM58 capsule or equivalent), 2 × spare battery per unit, talkback line to FOH.", peruste: "Kaksi lisää talon kalustosta, ei alihankintaa." },
+        { kuvaus: "Monitorilinjat", kategoria: "ääni · tarve", diff: "4 → 6 kpl", lahde: "Rider v2 · s. 3 · monitoring", arvio: "≈ 200 €", hinta: "240 €", hinnoittelija: "Anna Kivistö 11.22",
+          lainausOtsikko: "Lähdelainaus · rider v2 s. 3", lainaus: "Monitoring: 6 sends total — 4 × wedge on stage, 2 × IEM feed from FOH position. Monitor engineer requested if more than 4 sends are used.", peruste: "Mallin arvio ei sisältänyt monitoriteknikon 4 h vuoroa. Hinta korjattu ylös." },
+        { kuvaus: "Soundcheck 45 → 75 min", kategoria: "aikataulu · slot", diff: "+30 min", lahde: "Rider v2 · s. 3 · schedule", arvio: "≈ 0 €", hinta: "0 €", hinnoittelija: "Anna Kivistö 11.22",
+          lainausOtsikko: "Lähdelainaus · rider v2 s. 3", lainaus: "Soundcheck: minimum 75 minutes with full band, line check included.", peruste: "Mahtuu kasausikkunaan, ei lisävuoroja. Siirtää soundcheckin 14:30:een." }
+      ],
+      summa: hinnoiteltu ? "+420 €" : "arvio ≈ 380 €",
+      nappi: hinnoiteltu ? "Lähetetty tilaajalle" : "Hinnoittele kolme riviä",
+      jalkiVari: hinnoiteltu ? "#2f4a3d" : "#4a3c26",
+      jalkiOtsikko: hinnoiteltu ? "Yksi päätös tilaajalle · 3 riviä samasta latauksesta" : "Odottaa hinnoittelua · ei vielä muutospyyntö",
+      jalkiTeksti: hinnoiteltu
+        ? "Marja Lehtinen näkee ryhmän summan 420 €, ei mallin arviota. Hinta on tuottajan, ja se sitoo."
+        : "Mallin arviot ovat luonnos, jolla ei voi hyväksyä mitään. Rivit eivät näy tilaajalle eivätkä vaikuta laskentaan ennen hinnoittelua."
+    };
+  }
+}
+</script>
+</body>
+</html>
