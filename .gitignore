@@ -1,0 +1,31 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editorit
+.vscode/
+.idea/
+*.swp
+
+# Ympäristömuuttujat ja salaisuudet
+.env
+.env.*
+!.env.example
+
+# Riippuvuudet ja buildit
+node_modules/
+dist/
+build/
+.next/
+.astro/
+
+# Lokit
+*.log
+npm-debug.log*
+
+# Asiakas- ja tuotantomateriaali. Tämä repo on julkinen.
+/asiakasdata/
+/private/
+*.local.md
